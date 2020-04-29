@@ -13,12 +13,12 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.apache.log4j.Logger;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,5 +172,31 @@ public class UserController extends BaseResult {
         }
 
     }
+
+    @RequestMapping(value="/importExcel",method= RequestMethod.POST)
+    public String importExcel(@RequestParam("myfile") MultipartFile myFile) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            Integer num = userService.importExcel(myFile);
+        } catch (Exception e) {
+            modelAndView.addObject("msg", e.getMessage());
+            return "index";
+        }
+        modelAndView.addObject("msg", "数据导入成功");
+
+        return "index";
+    }
+
+    @RequestMapping(value="/exportExcel",method=RequestMethod.GET)
+    public void exportExcel(HttpServletResponse response) {
+        try {
+            userService.exportExcel(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 }

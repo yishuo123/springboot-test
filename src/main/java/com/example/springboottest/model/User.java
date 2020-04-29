@@ -17,6 +17,10 @@ public class User {
         this.peralm = peralm;
     }
 
+    public User() {
+
+    }
+
     public String getPeralm() {
         return peralm;
     }
