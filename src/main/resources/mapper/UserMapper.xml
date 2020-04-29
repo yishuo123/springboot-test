@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboottest.dao.UserMapper">
+    <resultMap type="com.example.springboottest.model.User" id="userMap">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pass_word" property="passWord" jdbcType="VARCHAR"/>
+        <result column="peralm" property="peralm" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+
+    <select id="selectAll" parameterType="java.util.Map" resultType="java.util.Map">
+        select Id id, name name
+        from user
+        where 1=1
+        <include refid="sql_select"></include>
+        ORDER BY peralm desc
+        limit #{page} , #{rows}
+    </select>
+
+    <!-- 查询总行数-->
+    <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1) from user where 1=1 <include refid="sql_select"></include>
+
+    </select>
+
+    <!-- 查询条件-->
+    <sql id="sql_select">
+        <if test="name !=null and name !=''">
+            and  name like #{name}
+        </if>
+    </sql>
+
+    <select id="findAll"  resultType="user">
+        select * from user
+    </select>
+
+    <select id="findByName" parameterType="java.lang.String" resultMap="userMap">
+        select * from user where 1=1 and name  = #{name}
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultMap="userMap">
+        select * from user where 1=1 and id  = #{id}
+    </select>
+
+
+</mapper>
