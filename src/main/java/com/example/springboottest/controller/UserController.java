@@ -173,6 +173,12 @@ public class UserController extends BaseResult {
 
     }
 
+
+    /**
+     * 导入
+     * @param myFile
+     * @return
+     */
     @RequestMapping(value="/importExcel",method= RequestMethod.POST)
     public String importExcel(@RequestParam("myfile") MultipartFile myFile) {
         ModelAndView modelAndView = new ModelAndView();
@@ -187,6 +193,10 @@ public class UserController extends BaseResult {
         return "index";
     }
 
+    /**
+     * 导出
+     * @param response
+     */
     @RequestMapping(value="/exportExcel",method=RequestMethod.GET)
     public void exportExcel(HttpServletResponse response) {
         try {
