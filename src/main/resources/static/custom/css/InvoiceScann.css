@@ -1,0 +1,43 @@
+.common-body #grid-row .col-xs-12 .widget-box .widget-body .widget-main .form-panl #create-date{
+	margin: 0px;
+}
+
+.common-body #grid-row .col-xs-12 .widget-box .widget-body .widget-main .form-panl .input-group{
+	width: 160px;
+}
+.form-control{margin:5px 5px 5px 5px;}
+
+.form-control-invoice{
+	margin:5px 5px 5px 5px;
+	font-weight: normal;
+}
+
+.ui-jqgrid-sortable label{
+	display:inline-block;
+	width:80px;
+	text-align:right;
+}
+
+.ace-right .ace-icon{
+	margin-right: 0px;
+}
+
+/* 设置input 框对齐 */
+.ace-right label{
+	display:inline-block;
+	width:546px;
+	text-align:right;
+}
+
+/* 设置选择的金额和input 框对齐 */
+.seach-amount {
+	margin: 0px  21px 10px;
+}
+
+.ui-jqgrid-sortable .note-label{
+	width: 44px;
+}
+
+.common-body .tab-pane .ui-jqgrid-sortable:hover{
+	color: #777;
+}

@@ -1,0 +1,29 @@
+.common-body #grid-row .col-xs-12 .widget-box .widget-body .widget-main .form-panl #create-date{
+	margin: 0px;
+}
+.common-body #grid-row .col-xs-12 .widget-box .widget-body .widget-main .form-panl .input-group{
+	width: 160px;
+}
+/*加载div 下面的线*/
+.search-form-bottom{
+	border-bottom:solid 1px #CCC;
+	padding: 0 10px 10px 10px;
+	overflow:hidden;
+}
+/*加载div 上面的线*/
+.search-form-top{
+	border-top:solid 1px #CCC;
+	padding: 10px 10px 0 10px;
+	overflow:hidden;
+}
+.search-form{
+	padding: 10px;
+}
+
+.form-panl label {
+	display:inline-block;
+	width:100px;
+	text-align:right;
+
+}
+
