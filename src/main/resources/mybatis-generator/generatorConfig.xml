@@ -6,7 +6,7 @@
 <generatorConfiguration>
 
     <!-- 指定数据连接驱动jar地址 -->
-    <classPathEntry location="E:/java/maven/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar" />
+    <classPathEntry location="C:/Users/admin/.m2/repository/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar" />
 
     <context id="bid" targetRuntime="MyBatis3" defaultModelType="flat">
 
@@ -15,29 +15,30 @@
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=utf8&amp;useSSL=false" userId="root" password="root" />
+<!--        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test?characterEncoding=utf8&amp;useSSL=false" userId="root" password="root" />-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://10.110.63.28:3306/iai?characterEncoding=utf8&amp;useSSL=false" userId="iai" password="123456a?" />
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
         <!-- 生成模型的包名和位置 -->
-        <javaModelGenerator targetPackage="com.example.springboottest.model" targetProject="E:/project">
+        <javaModelGenerator targetPackage="com.example.springboottest.model" targetProject="D:/project">
             <property name="enableSubPackages" value="false" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="/mybatis" targetProject="E:/project">
+        <sqlMapGenerator targetPackage="/mybatis" targetProject="D:/project">
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
 
         <!-- 生成DAO的包名和位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.springboottest.dao" targetProject="E:/project">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.springboottest.dao" targetProject="D:/project">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
 
 
-        <table schema="test" tableName="t_role"
+        <table schema="iai" tableName="t_news"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
