@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -107,6 +108,9 @@ public class UserServiceImpl implements UserService {
         if(rows==0){
             throw new Exception("请填写数据");
         }
+        // 取xls 中 表头的字段的坐标
+        Map<String,Integer>  mapIndex = getSheetTitleIndex(sheet);
+
         // 循环所有的行
         for (int i = 1; i <= rows+1; i++) {
             // 读取左上端单元格
@@ -116,6 +120,7 @@ public class UserServiceImpl implements UserService {
                 // **读取cell**
                 User user = new User();
                 //姓名
+//                String name = getCellValue(row.getCell(mapIndex.get("名称")));
                 String name = getCellValue(row.getCell(0));
                 user.setName(name);
                 //密码
@@ -143,6 +148,33 @@ public class UserServiceImpl implements UserService {
             }
         }
         return rows-1;
+    }
+
+    /**
+     * 取xls 表格中第一行表格的坐标
+     * @param
+     */
+    private Map<String,Integer> getSheetTitleIndex(Sheet sheet) {
+        Map<String,Integer> map = new HashMap<>();
+        // 获取表格中第一行的标题的下标
+        Row rows = sheet.getRow(0);
+        for(Cell cell:rows){
+            cell.setCellType(cell.CELL_TYPE_STRING);//不推荐使用的方法,但是取出列有数字的话,要转换一下
+            if(!org.apache.commons.lang3.StringUtils.isBlank(cell.getStringCellValue())){
+                if(cell.getStringCellValue().equals("标题")){
+                    map.put("标题",cell.getColumnIndex());
+                }
+                if(cell.getStringCellValue().equals("作者")){
+                    map.put("作者",cell.getColumnIndex());
+                }
+                if(cell.getStringCellValue().equals("来源")){
+                    map.put("来源",cell.getColumnIndex());
+                }
+
+            }
+        }
+
+        return map;
     }
 
     /**
