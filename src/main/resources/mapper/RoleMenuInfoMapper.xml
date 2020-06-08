@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.springboottest.dao.RoleMenuInfoMapper">
+	<resultMap type="com.example.springboottest.bean.model.RoleMenuInfo" id="roleMenuInfoMap">
+		<id column="id" property="id" jdbcType="BIGINT"/>
+		<result column="role_id" property="roleId" jdbcType="BIGINT"/>
+		<result column="menu_id" property="roleId" jdbcType="BIGINT"/>
+	</resultMap>
+	
+	<!-- 列 -->
+	<sql id="Base_Column_List">
+		id,role_id,menu_id
+	</sql>
+	
+	<!-- 根据角色ID查询相应的权限 -->
+	<select id="findRoleMenuInfoByRoleId" parameterType="Long" resultMap="roleMenuInfoMap">
+		SELECT <include refid="Base_Column_List"></include> FROM db_invoice.t_role_menu
+		WHERE role_id = #{roleId}
+	</select>
+	
+	<!-- 根据角色ID和菜单ID查询中间表 -->
+	<select id="findRoleMenuInfoByRoleIdAndMenuId" parameterType="Long" resultType="java.lang.Integer">
+		SELECT COUNT(1) FROM db_invoice.t_role_menu
+		WHERE role_id = #{roleId} AND menu_id = #{menuId}
+	</select>
+	
+	<!-- 根据角色ID删除上次的权限信息 -->
+	<delete id="delRoleMenuByRoleId" parameterType="Long">
+		DELETE FROM db_invoice.t_role_menu WHERE role_id = #{roleId};
+	</delete>
+	
+	<!-- 角色添加权限信息 -->
+	<insert id="addRoleMenu" parameterType="com.example.springboottest.bean.model.RoleMenuInfo">
+		INSERT INTO db_invoice.t_role_menu(
+			<include refid="Base_Column_List"></include>
+		)VALUES(
+			#{id, jdbcType=BIGINT },
+			#{roleId, jdbcType=BIGINT },
+			#{menuId, jdbcType=BIGINT }
+		);
+	</insert>
+	
+</mapper>
