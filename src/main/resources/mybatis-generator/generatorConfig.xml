@@ -6,7 +6,7 @@
 <generatorConfiguration>
 
     <!-- 指定数据连接驱动jar地址 -->
-    <classPathEntry location="C:/Users/admin/.m2/repository/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar" />
+    <classPathEntry location="C:\Users\admin\.m2\repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar" />
 
     <context id="bid" targetRuntime="MyBatis3" defaultModelType="flat">
 
