@@ -41,26 +41,26 @@ public class shiroConfig {
 
         // 或者是
 
-        map.put("/user/login","anon");
-        map.put("/user/tologin","anon");
+//        map.put("/user/login","anon");
+//        map.put("/user/tologin","anon");
 
         // 不进行拦截
-        map.put("/list","anon");
-
-        map.put("/*","authc");
+//        map.put("/list","anon");
+//
+//        map.put("/*","authc");
 
 
         // 配置shiro 的过滤器
         // 拦截未授权的请求
-        map.put("/user/insert","perms[user:insert]");
-
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
+//        map.put("/user/insert","perms[user:insert]");
+//
+//        shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 
         //修改要拦截的登陆页面
-        shiroFilterFactoryBean.setLoginUrl("/user/tologin");
+//        shiroFilterFactoryBean.setLoginUrl("/user/tologin");
 
         //设置未授权跳转的页面
-        shiroFilterFactoryBean.setUnauthorizedUrl("/user/noAuthc");
+//        shiroFilterFactoryBean.setUnauthorizedUrl("/user/noAuthc");
 
         return shiroFilterFactoryBean;
     }
