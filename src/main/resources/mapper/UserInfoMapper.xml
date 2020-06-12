@@ -32,6 +32,11 @@
 	</select>
 
 	<!-- 添加会员信息 -->
+	<!--
+			FROM t.user
+			WHERE id = #{id, jdbcType=BIGINT }
+
+			-->
 	<insert id="add" parameterType="com.example.springboottest.bean.model.UserInfo">
 
 		INSERT INTO t_user(
@@ -50,8 +55,7 @@
 			#{modifyBy, jdbcType=VARCHAR },
 			#{modifyDate, jdbcType=TIMESTAMP },
 			#{remark, jdbcType=VARCHAR }
-			FROM t.user
-			WHERE id = #{id, jdbcType=BIGINT }
+
 
 		)
 	</insert>

@@ -116,6 +116,7 @@ public class LoginController {
 	public String logOut(HttpServletRequest request){
 		SessionFactory.removeAllSession(request);
 		
-		return "redirect:/login";
+//		return "redirect:login";
+		return "admin/login";
 	}
 }
