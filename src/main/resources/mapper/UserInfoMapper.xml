@@ -27,14 +27,14 @@
 	<select id="selectUserInfoById"  resultMap="userInfoMap">
 		SELECT
 			<include refid="Base_Column_List"/>
-		FROM db_invoice.t_user
+		FROM t_user
 		WHERE id = #{id}
 	</select>
 
 	<!-- 添加会员信息 -->
 	<insert id="add" parameterType="com.example.springboottest.bean.model.UserInfo">
 
-		INSERT INTO db_invoice.t_user(
+		INSERT INTO t_user(
 			<include refid="Base_Column_List"/>
 		)
 		VALUES(
@@ -58,7 +58,7 @@
 
 	<!-- 查询user表 -->
 	<sql id="form_user">
-		SELECT <include refid="Base_Column_List"/>  FROM db_invoice.t_user
+		SELECT <include refid="Base_Column_List"/>  FROM t_user
 	</sql>
 	<!-- 效验用户是否存在 -->
 	<select id="existUserName" parameterType="String" resultType="com.example.springboottest.bean.model.UserInfo">
@@ -106,7 +106,7 @@
 
 	<!-- 根据条件查询数据总数，用于分页 -->
 	<select id="selectCountUserInfoByParams" parameterType="java.util.Map" resultType="java.lang.Integer">
-		SELECT COUNT(1) FROM db_invoice.t_user
+		SELECT COUNT(1) FROM t_user
 		<include refid="selectParams" />
 	</select>
 
@@ -133,21 +133,21 @@
 
 	<!-- 根据uid修改用户密码 -->
 	<update id="updatePwd" >
-		UPDATE db_invoice.t_user SET
+		UPDATE t_user SET
 		password = #{pwd, jdbcType=VARCHAR}
 		WHERE id = #{id, jdbcType=BIGINT}
 	</update>
 
 	<!-- 根据uid修改真实姓名 -->
 	<update id="updateRealName" >
-		UPDATE db_invoice.t_user SET
+		UPDATE t_user SET
 		real_name = #{realName, jdbcType=VARCHAR}
 		WHERE id = #{id, jdbcType=BIGINT}
 	</update>
 
 	<!-- 修改用户信息 -->
 	<update id="updateByid" parameterType="com.example.springboottest.bean.model.UserInfo">
-		UPDATE db_invoice.t_user
+		UPDATE t_user
 		SET user_name = #{userName, jdbcType=VARCHAR },
 		phone = #{phone, jdbcType=VARCHAR },
 		real_Name = #{realName, jdbcType=VARCHAR },
@@ -159,7 +159,7 @@
 	</update>
 	<!-- 禁用用户登录信息 -->
 	<update id="fordenUserInfoById" >
-		UPDATE db_invoice.t_user SET
+		UPDATE t_user SET
 		status = 2
 		WHERE id IN
 		<foreach collection="array" item="item" open="(" separator="," close=")" >
@@ -168,7 +168,7 @@
 	</update>
 	<!-- 启用用户登录信息 -->
 	<update id="openUserInfoById" parameterType="Long">
-		UPDATE db_invoice.t_user SET
+		UPDATE t_user SET
 		status = 1
 		WHERE id IN
 		<foreach collection="array" item="item" open="(" separator="," close=")" >
@@ -178,7 +178,7 @@
 
 	<!-- 删除用户信息 -->
 	<delete id="delUserInfo">
-		DELETE FROM db_invoice.t_user WHERE id IN
+		DELETE FROM t_user WHERE id IN
 		<foreach collection="array" item="item" open="(" separator="," close=")" >
 			#{item}
 		</foreach>
@@ -187,7 +187,7 @@
 
 	<!-- 重置用户密码信息 -->
 	<update id="resUserInfoById" parameterType="Long">
-		UPDATE db_invoice.t_user SET
+		UPDATE t_user SET
 		password = '96e79218965eb72c92a549dd5a330112'
 		WHERE id = #{rowid, jdbcType=BIGINT}
 	</update>

@@ -14,24 +14,24 @@
 	
 	<!-- 根据角色ID查询相应的权限 -->
 	<select id="findRoleMenuInfoByRoleId" parameterType="Long" resultMap="roleMenuInfoMap">
-		SELECT <include refid="Base_Column_List"></include> FROM db_invoice.t_role_menu
+		SELECT <include refid="Base_Column_List"></include> FROM t_role_menu
 		WHERE role_id = #{roleId}
 	</select>
 	
 	<!-- 根据角色ID和菜单ID查询中间表 -->
 	<select id="findRoleMenuInfoByRoleIdAndMenuId" parameterType="Long" resultType="java.lang.Integer">
-		SELECT COUNT(1) FROM db_invoice.t_role_menu
+		SELECT COUNT(1) FROM t_role_menu
 		WHERE role_id = #{roleId} AND menu_id = #{menuId}
 	</select>
 	
 	<!-- 根据角色ID删除上次的权限信息 -->
 	<delete id="delRoleMenuByRoleId" parameterType="Long">
-		DELETE FROM db_invoice.t_role_menu WHERE role_id = #{roleId};
+		DELETE FROM t_role_menu WHERE role_id = #{roleId};
 	</delete>
 	
 	<!-- 角色添加权限信息 -->
 	<insert id="addRoleMenu" parameterType="com.example.springboottest.bean.model.RoleMenuInfo">
-		INSERT INTO db_invoice.t_role_menu(
+		INSERT INTO t_role_menu(
 			<include refid="Base_Column_List"></include>
 		)VALUES(
 			#{id, jdbcType=BIGINT },

@@ -14,7 +14,7 @@
 
 	<!-- 添加角色信息 -->
 	<insert id="add" parameterType="com.example.springboottest.bean.model.RoleInfo">
-		INSERT INTO db_invoice.t_role( <include refid="Base_Column_List"/> )
+		INSERT INTO t_role( <include refid="Base_Column_List"/> )
 		VALUES(
 		#{id, jdbcType=BIGINT },
 		#{roleName, jdbcType=VARCHAR },
@@ -24,13 +24,13 @@
 
 	<!-- 效验角色名是否存在 -->
 	<select id="existroleName" parameterType="String" resultType="com.example.springboottest.bean.model.RoleInfo">
-		SELECT id,role_name,role_code FROM  db_invoice.t_role
+		SELECT id,role_name,role_code FROM  t_role
 		WHERE role_name = #{roleName,jdbcType=VARCHAR}
 
 	</select>
 	<!-- 修改角色信息 -->
 	<update id="update" parameterType="com.example.springboottest.bean.model.RoleInfo">
-		UPDATE db_invoice.t_role
+		UPDATE t_role
 		SET role_name = #{roleName, jdbcType=VARCHAR },
 		role_code = #{roleCode, jdbcType=VARCHAR }
 		WHERE id = #{id, jdbcType=BIGINT }
@@ -38,7 +38,7 @@
 
 	<!-- 获取角色信息 -->
 	<select id="getRoleInfo" resultMap="roleInfoMap">
-		SELECT <include refid="Base_Column_List"/> FROM db_invoice.t_role
+		SELECT <include refid="Base_Column_List"/> FROM t_role
 		WHERE 1=1 
 		<if test="roleName != null and roleName != ''">
 			and role_name like '%${roleName}%'
@@ -48,7 +48,7 @@
 
 	<!-- 删除角色信息 -->
 	<delete id="del">
-		DELETE FROM db_invoice.t_role WHERE id IN
+		DELETE FROM t_role WHERE id IN
 		<foreach collection="array" item="item" open="(" separator="," close=")" >
 			#{item}
 		</foreach>

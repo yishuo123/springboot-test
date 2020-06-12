@@ -21,8 +21,8 @@
 	<!-- 获取菜单信息 -->
 	<select id="findMenuInfoByParams" resultMap="menuInfoMap">
 		SELECT <include refid="Base_Column_List"/>,
-		(SELECT t2.menu_name FROM db_invoice.t_menu t2 where t2.id = t1.parent_id) as parentName
-		FROM db_invoice.t_menu t1 WHERE 1=1
+		(SELECT t2.menu_name FROM t_menu t2 where t2.id = t1.parent_id) as parentName
+		FROM t_menu t1 WHERE 1=1
 		<if test="menuName != null and menuName != ''">
 			and menu_name like #{menuName}
 		</if>
@@ -37,14 +37,14 @@
 	
 	<!-- 获取所有父节点菜单 -->
 	<select id="findMenuInfoParent" resultMap="menuInfoMap">
-		SELECT <include refid="Base_Column_List"/> FROM db_invoice.t_menu
+		SELECT <include refid="Base_Column_List"/> FROM t_menu
 		WHERE level = 1
 		ORDER BY display_order
 	</select>
 	
 	<!-- 添加菜单信息 -->
 	<insert id="add" parameterType="com.example.springboottest.bean.model.MenuInfo">
-		INSERT INTO db_invoice.t_menu( <include refid="Base_Column_List"/> )
+		INSERT INTO t_menu( <include refid="Base_Column_List"/> )
 		VALUES(
 			#{id, jdbcType=BIGINT },
 			#{menuName, jdbcType=VARCHAR },
@@ -60,7 +60,7 @@
 	
 	<!-- 修改菜单信息 -->
 	<update id="update" parameterType="com.example.springboottest.bean.model.MenuInfo">
-		UPDATE db_invoice.t_menu
+		UPDATE t_menu
 		SET menu_name = #{menuName, jdbcType=VARCHAR },
 			url = #{url, jdbcType=VARCHAR },
 			level = #{level, jdbcType=INTEGER },
@@ -74,7 +74,7 @@
 	
 	<!-- 删除菜单信息 -->
 	<delete id="del">
-		DELETE FROM db_invoice.t_menu WHERE id IN
+		DELETE FROM t_menu WHERE id IN
 		<foreach collection="array" item="item" open="(" separator="," close=")" >
 			#{item}
 		</foreach>
@@ -82,23 +82,23 @@
 	
 	<!-- 根据父级节点ID查询子菜单 -->
 	<select id="findMenuInfoByParentId" parameterType="Long" resultType="java.lang.Integer">
-		SELECT COUNT(1) FROM db_invoice.t_menu WHERE parent_id = #{parentId}
+		SELECT COUNT(1) FROM t_menu WHERE parent_id = #{parentId}
 	</select>
 	<!-- 根据父级节点ID查询子菜单信息 -->
 	<select id="findMenuInfoSon" parameterType="Long" resultMap="menuInfoMap">
-		SELECT <include refid="Base_Column_List"/> FROM db_invoice.t_menu WHERE parent_id = #{parentId}
+		SELECT <include refid="Base_Column_List"/> FROM t_menu WHERE parent_id = #{parentId}
 	</select>
 	
 	<!-- 根据ID查询菜单信息 -->
 	<select id="findMenuInfoById" parameterType="Long" resultType="com.example.springboottest.bean.model.MenuInfo">
-		SELECT <include refid="Base_Column_List"/> FROM db_invoice.t_menu
+		SELECT <include refid="Base_Column_List"/> FROM t_menu
 		WHERE id = #{id}
 	</select>
 	
 	<!-- 根据角色ID关联查询菜单信息 -->
 	<select id="findMenuInfoByRoleId" parameterType="Long" resultMap="menuInfoMap">
-		SELECT a.* FROM db_invoice.t_menu a
-		LEFT JOIN db_invoice.t_role_menu b ON a.id = b.menu_id
+		SELECT a.* FROM t_menu a
+		LEFT JOIN t_role_menu b ON a.id = b.menu_id
 		WHERE b.role_id = #{roleId}
 		ORDER BY a.display_order
 	</select>
