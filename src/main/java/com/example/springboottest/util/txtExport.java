@@ -32,8 +32,7 @@ public class txtExport {
     /**
      * 写文件
      *
-     * @param newStr
-     *            新内容
+     * @param newStr 新内容
      * @throws IOException
      */
     public static boolean writeTxtFile(String newStr) throws IOException {
@@ -66,7 +65,7 @@ public class txtExport {
             }
             buf.append(filein);
 
-            pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file),"utf-8")));
+            pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8")));
 //            fos = new FileOutputStream(file);
 //            pw = new PrintWriter(fos, Boolean.parseBoolean("utf-8"));
             pw.write(buf.toString().toCharArray());

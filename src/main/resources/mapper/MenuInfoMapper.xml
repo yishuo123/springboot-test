@@ -1,105 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.springboottest.dao.MenuInfoMapper">
-	<resultMap type="com.example.springboottest.bean.model.MenuInfo" id="menuInfoMap">
-		<id column="id" property="id" jdbcType="BIGINT"/>
-		<result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
-		<result column="url" property="url" jdbcType="VARCHAR"/>
-		<result column="level" property="level" jdbcType="INTEGER"/>
-		<result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
-		<result column="status" property="status" jdbcType="INTEGER"/>
-		<result column="display_order" property="displayOrder" jdbcType="INTEGER"/>
-		<result column="remark" property="remark" jdbcType="VARCHAR"/>
-		<result column="menu_icon" property="menuIcon" jdbcType="VARCHAR"/>
-	</resultMap>
-	
-	<!-- 列 -->
-	<sql id="Base_Column_List">
-		id,menu_name,url,level,parent_id,display_order,status,remark,menu_icon
-	</sql>
-	
-	<!-- 获取菜单信息 -->
-	<select id="findMenuInfoByParams" resultMap="menuInfoMap">
-		SELECT <include refid="Base_Column_List"/>,
-		(SELECT t2.menu_name FROM t_menu t2 where t2.id = t1.parent_id) as parentName
-		FROM t_menu t1 WHERE 1=1
-		<if test="menuName != null and menuName != ''">
-			and menu_name like #{menuName}
-		</if>
-		ORDER BY display_order
-	</select>
-	
-	<!-- <sql id="selectParams">
-		<if test="level != null && level != ''">
-			and level = #{level}
-		</if>
-	</sql> -->
-	
-	<!-- 获取所有父节点菜单 -->
-	<select id="findMenuInfoParent" resultMap="menuInfoMap">
-		SELECT <include refid="Base_Column_List"/> FROM t_menu
-		WHERE level = 1
-		ORDER BY display_order
-	</select>
-	
-	<!-- 添加菜单信息 -->
-	<insert id="add" parameterType="com.example.springboottest.bean.model.MenuInfo">
-		INSERT INTO t_menu( <include refid="Base_Column_List"/> )
-		VALUES(
-			#{id, jdbcType=BIGINT },
-			#{menuName, jdbcType=VARCHAR },
-			#{url, jdbcType=VARCHAR },
-			#{level, jdbcType=INTEGER },
-			#{parentId, jdbcType=VARCHAR },
-			#{displayOrder, jdbcType=INTEGER },
-			#{status, jdbcType=INTEGER },
-			#{remark, jdbcType=VARCHAR },
-			#{menuIcon, jdbcType=VARCHAR }
-		)
-	</insert> 
-	
-	<!-- 修改菜单信息 -->
-	<update id="update" parameterType="com.example.springboottest.bean.model.MenuInfo">
-		UPDATE t_menu
-		SET menu_name = #{menuName, jdbcType=VARCHAR },
-			url = #{url, jdbcType=VARCHAR },
-			level = #{level, jdbcType=INTEGER },
-			parent_id = #{parentId, jdbcType=VARCHAR },
-			display_order = #{displayOrder, jdbcType=INTEGER },
-			status = #{status, jdbcType=INTEGER },
-			remark = #{remark, jdbcType=VARCHAR },
-			menu_icon = #{menuIcon, jdbcType=VARCHAR }
-		WHERE id = #{id, jdbcType=BIGINT }
-	</update>
-	
-	<!-- 删除菜单信息 -->
-	<delete id="del">
-		DELETE FROM t_menu WHERE id IN
-		<foreach collection="array" item="item" open="(" separator="," close=")" >
-			#{item}
-		</foreach>
-	</delete>
-	
-	<!-- 根据父级节点ID查询子菜单 -->
-	<select id="findMenuInfoByParentId" parameterType="Long" resultType="java.lang.Integer">
-		SELECT COUNT(1) FROM t_menu WHERE parent_id = #{parentId}
-	</select>
-	<!-- 根据父级节点ID查询子菜单信息 -->
-	<select id="findMenuInfoSon" parameterType="Long" resultMap="menuInfoMap">
-		SELECT <include refid="Base_Column_List"/> FROM t_menu WHERE parent_id = #{parentId}
-	</select>
-	
-	<!-- 根据ID查询菜单信息 -->
-	<select id="findMenuInfoById" parameterType="Long" resultType="com.example.springboottest.bean.model.MenuInfo">
-		SELECT <include refid="Base_Column_List"/> FROM t_menu
-		WHERE id = #{id}
-	</select>
-	
-	<!-- 根据角色ID关联查询菜单信息 -->
-	<select id="findMenuInfoByRoleId" parameterType="Long" resultMap="menuInfoMap">
-		SELECT a.* FROM t_menu a
-		LEFT JOIN t_role_menu b ON a.id = b.menu_id
-		WHERE b.role_id = #{roleId}
-		ORDER BY a.display_order
-	</select>
+    <resultMap type="com.example.springboottest.bean.model.MenuInfo" id="menuInfoMap">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="display_order" property="displayOrder" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 列 -->
+    <sql id="Base_Column_List">
+        id,menu_name,url,level,parent_id,display_order,status,remark,menu_icon
+    </sql>
+
+    <!-- 获取菜单信息 -->
+    <select id="findMenuInfoByParams" resultMap="menuInfoMap">
+        SELECT<include refid="Base_Column_List"/>,
+        (SELECT t2.menu_name FROM t_menu t2 where t2.id = t1.parent_id) as parentName
+        FROM t_menu t1 WHERE 1=1
+        <if test="menuName != null and menuName != ''">
+            and menu_name like #{menuName}
+        </if>
+        ORDER BY display_order
+    </select>
+
+    <!-- <sql id="selectParams">
+        <if test="level != null && level != ''">
+            and level = #{level}
+        </if>
+    </sql> -->
+
+    <!-- 获取所有父节点菜单 -->
+    <select id="findMenuInfoParent" resultMap="menuInfoMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_menu
+        WHERE level = 1
+        ORDER BY display_order
+    </select>
+
+    <!-- 添加菜单信息 -->
+    <insert id="add" parameterType="com.example.springboottest.bean.model.MenuInfo">
+        INSERT INTO t_menu(
+        <include refid="Base_Column_List"/>
+        )
+        VALUES(
+        #{id, jdbcType=BIGINT },
+        #{menuName, jdbcType=VARCHAR },
+        #{url, jdbcType=VARCHAR },
+        #{level, jdbcType=INTEGER },
+        #{parentId, jdbcType=VARCHAR },
+        #{displayOrder, jdbcType=INTEGER },
+        #{status, jdbcType=INTEGER },
+        #{remark, jdbcType=VARCHAR },
+        #{menuIcon, jdbcType=VARCHAR }
+        )
+    </insert>
+
+    <!-- 修改菜单信息 -->
+    <update id="update" parameterType="com.example.springboottest.bean.model.MenuInfo">
+        UPDATE t_menu
+        SET menu_name = #{menuName, jdbcType=VARCHAR },
+        url = #{url, jdbcType=VARCHAR },
+        level = #{level, jdbcType=INTEGER },
+        parent_id = #{parentId, jdbcType=VARCHAR },
+        display_order = #{displayOrder, jdbcType=INTEGER },
+        status = #{status, jdbcType=INTEGER },
+        remark = #{remark, jdbcType=VARCHAR },
+        menu_icon = #{menuIcon, jdbcType=VARCHAR }
+        WHERE id = #{id, jdbcType=BIGINT }
+    </update>
+
+    <!-- 删除菜单信息 -->
+    <delete id="del">
+        DELETE FROM t_menu WHERE id IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- 根据父级节点ID查询子菜单 -->
+    <select id="findMenuInfoByParentId" parameterType="Long" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM t_menu WHERE parent_id = #{parentId}
+    </select>
+    <!-- 根据父级节点ID查询子菜单信息 -->
+    <select id="findMenuInfoSon" parameterType="Long" resultMap="menuInfoMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_menu WHERE parent_id = #{parentId}
+    </select>
+
+    <!-- 根据ID查询菜单信息 -->
+    <select id="findMenuInfoById" parameterType="Long" resultType="com.example.springboottest.bean.model.MenuInfo">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_menu
+        WHERE id = #{id}
+    </select>
+
+    <!-- 根据角色ID关联查询菜单信息 -->
+    <select id="findMenuInfoByRoleId" parameterType="Long" resultMap="menuInfoMap">
+        SELECT a.* FROM t_menu a
+        LEFT JOIN t_role_menu b ON a.id = b.menu_id
+        WHERE b.role_id = #{roleId}
+        ORDER BY a.display_order
+    </select>
 </mapper>

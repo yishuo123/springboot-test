@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>系统</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
     <#include "include/base_head.ftl">
     <link rel="stylesheet" href="${css }/login.css"/>
@@ -35,7 +35,7 @@
                                     </h4>
 
                                     <div class="space-6"></div>
-                                    <div id="login-msg" class="alert alert-danger hide" >
+                                    <div id="login-msg" class="alert alert-danger hide">
                                         <i id="login-msg-icon" class="ace-icon fa fa-warning" style="width: 20px;"></i>
                                         <span id="login-msg-text">请输入账户名和密码</span>
                                         <br/>
@@ -45,14 +45,16 @@
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
 															<i class="ace-icon fa fa-user login-icon"></i>
-															<input id="username-input" name="userName" type="text"  class="form-control" placeholder="会员账户" />
+															<input id="username-input" name="userName" type="text"
+                                                                   class="form-control" placeholder="会员账户"/>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-left">
 															<i class="ace-icon fa fa-lock login-icon"></i>
-															<input id="pwd-input" name="pwd" type="password" class="form-control" placeholder="登录密码" />
+															<input id="pwd-input" name="pwd" type="password"
+                                                                   class="form-control" placeholder="登录密码"/>
 														</span>
                                             </label>
 
@@ -64,7 +66,8 @@
                                                     <span class="lbl"> Remember Me</span>
                                                 </label> -->
 
-                                                <button id="login-btn" type="button" class="width-100 btn btn-sm btn-primary">
+                                                <button id="login-btn" type="button"
+                                                        class="width-100 btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">登&nbsp;&nbsp;&nbsp;&nbsp;录</span>
                                                 </button>
@@ -78,7 +81,8 @@
 
                                 <div class="toolbar clearfix">
                                     <div>
-                                        <a href="#" data-target="#forgot-box" class="forgot-password-link" style="display: none;">
+                                        <a href="#" data-target="#forgot-box" class="forgot-password-link"
+                                           style="display: none;">
                                             <i class="ace-icon fa fa-arrow-left"></i>
                                             忘记密码
                                         </a>
@@ -111,7 +115,8 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input type="email" class="form-control"
+                                                                   placeholder="Email"/>
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
                                             </label>
@@ -144,12 +149,12 @@
 
 <#include "include/base_foot.ftl">
 <script src="http://cdn.bootcss.com/jquery.form/3.51/jquery.form.min.js"></script>
-<script src="${js }/login.js?ver=1" ></script>
+<script src="${js }/login.js?ver=1"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
-    jQuery(function($) {
-        $(document).on('click', '.toolbar a[data-target]', function(e) {
+    jQuery(function ($) {
+        $(document).on('click', '.toolbar a[data-target]', function (e) {
             e.preventDefault();
             var target = $(this).data('target');
             $('.widget-box.visible').removeClass('visible');//hide others
@@ -158,7 +163,7 @@
     });
 
     //you don't need this, just used for changing background
-    jQuery(function($) {
+    jQuery(function ($) {
         $('body').attr('class', 'login-layout blur-login');
         $('#id-text2').attr('class', 'white');
         $('#id-company-text').attr('class', 'light-blue');

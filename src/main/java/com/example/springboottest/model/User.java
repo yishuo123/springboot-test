@@ -7,7 +7,7 @@ public class User {
     private String userName;
     private String passWord;
 
-    private  String peralm;
+    private String peralm;
 
     public User(int id, String name, String userName, String passWord, String peralm) {
         this.id = id;

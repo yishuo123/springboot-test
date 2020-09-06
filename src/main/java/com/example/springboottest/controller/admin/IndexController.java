@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
 
     @RequestMapping("")
-    public String index(HttpServletRequest request){
+    public String index(HttpServletRequest request) {
         return "redirect:/admin";
     }
 }

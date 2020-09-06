@@ -2,7 +2,11 @@
 <!-- /section:basics/navbar.layout -->
 <div class="main-container" id="main-container">
     <script type="text/javascript">
-        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+
         function setIframeHeight(iframe) {
             if (iframe) {
                 var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
@@ -24,7 +28,10 @@
         <!-- #section:basics/content.breadcrumbs -->
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
-                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                try {
+                    ace.settings.check('breadcrumbs', 'fixed')
+                } catch (e) {
+                }
             </script>
 
             <ul class="breadcrumb" style="margin-top: 10px;">

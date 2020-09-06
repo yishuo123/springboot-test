@@ -44,8 +44,9 @@
                 }
                 gridConfig = this.data["tableData"];
             }
+
             //分析方法
-            function analyse(data,hcconfig) {
+            function analyse(data, hcconfig) {
                 var hc = [];
                 var hcindex = [];
                 if (hcconfig) {
@@ -70,7 +71,7 @@
                     });
                 } else {
                     for (var index = 0; index < data.length; index++) {
-                        
+
                         if (checkArray(data[index], hcindex) < 0) {
                             hc.push({
                                 index: []
@@ -82,15 +83,16 @@
                 }
                 var index = [];
                 for (var hczindex = 0; hczindex < hcindex.length; hczindex++) {
-                    var cfindex=hc[hczindex].index;
+                    var cfindex = hc[hczindex].index;
                     $.merge(index, cfindex);
                 }
                 return {
                     index: index,
-                    zindex:hcindex,
-                    hc:hc
+                    zindex: hcindex,
+                    hc: hc
                 };
             }
+
             function defaultanalyse(columnconfig, data) {
 
                 var zhcindex = [];
@@ -107,7 +109,7 @@
                                 break;
                             }
                         }
-                        zhc.push({ index: index });
+                        zhc.push({index: index});
                         zhcindex.push(title);
                     }
                 } else {
@@ -130,30 +132,31 @@
                             }
                         }
                         max = 0;
-                        zhc.push({ index: index });
+                        zhc.push({index: index});
                         zhcindex.push(title);
                     }
                 }
-                
-               return {
+
+                return {
                     index: null,
                     zindex: zhcindex,
                     hc: zhc
                 }
             }
+
             function checkArray(key, array) {
-                var index=-1;
+                var index = -1;
                 for (var i = 0; i < array.length; i++) {
                     if (key == array[i]) {
                         index = i;
                         break;
                     }
                 }
-                return index+"";
+                return index + "";
             }
 
             //表头分组方法
-            function groupHead(dom,head,headconfig,rowIndex) {
+            function groupHead(dom, head, headconfig, rowIndex) {
                 var columnc;
                 /****************头部分组******************/
                 var $thead = $("thead", dom);
@@ -201,6 +204,7 @@
                 }
                 return columnc.index;
             }
+
             //数据列分组方法
             function groupColumn(dom, column, columnconfig) {
                 var columnc;
@@ -221,7 +225,7 @@
                     $.each(columnc.zindex, function (index) {
                         groupSpan.push({
                             rowspan: columnc.hc[index].index.length,
-                            value:this,
+                            value: this,
                             proint: [row, zindex]
                         });
                         row += columnc.hc[index].index.length;
@@ -230,7 +234,7 @@
                 });
                 for (var i = trconfig.length - 1; i > 0; i--) {
                     var cf = trconfig[i];
-                    for (var m = 0; m < cf.hc.length;m++){
+                    for (var m = 0; m < cf.hc.length; m++) {
                         if (!trconfig[i - 1].hc[cf.hc[m].parent]["child"]) {
                             trconfig[i - 1].hc[cf.hc[m].parent]["child"] = [];
                         }
@@ -239,7 +243,7 @@
                             cf: cf.hc[m]
                         });
                     }
-                    
+
                 }
                 var columndata = [];
                 var cellIndex = [];
@@ -248,7 +252,7 @@
                     var olddata = columnconfig[columnc.index[i]];
                     for (var m = 0; m < column.length; m++) {
                         data.push(olddata[column[m]]);
-                        if(i==0) cellIndex.push(column[m]);
+                        if (i == 0) cellIndex.push(column[m]);
                     }
                     for (var m = 0; m < olddata.length; m++) {
                         if (checkArray(m, column) == -1) {
@@ -264,7 +268,7 @@
                     //var 
                     //检查分组列数据
                     $.each(columndata[row], function (cell) {
-                        if (cell<column.length) {
+                        if (cell < column.length) {
                             var checkpoint = checkPoint(row, cell, groupSpan);
                             if (checkpoint) {
                                 var $td = $("<td rowspan='" + checkpoint.rowspan + "' style='text-align:center;vertical-align:middle;'>" + this + "</td>");
@@ -275,10 +279,11 @@
                             $tr.append($td);
                         }
                     });
-                    $tbody.append($tr); 
-                });             
+                    $tbody.append($tr);
+                });
                 return cellIndex;
             }
+
             //校验数据坐标
             function checkPoint(row, cell, data) {
                 for (var i = 0; i < data.length; i++) {
@@ -288,6 +293,7 @@
                     }
                 }
             }
+
             //分组方法
             function group(head, column) {
                 var config = this.data["tableData"];
@@ -301,7 +307,7 @@
                     //列分组
                     groupColumn(this, index, columnconfig);
                 } else {
-                    var index=[];
+                    var index = [];
                     if (!column || !(column instanceof Array)) {
                         $.each(headconfig, function (zindex) {
                             index.push(zindex);
@@ -314,17 +320,18 @@
                             }
                         });
                     }
-                    var rowIndex=groupColumn(this, index, columnconfig);
+                    var rowIndex = groupColumn(this, index, columnconfig);
                     //如果不是头分组，头在不改变列的情况，自动合并
                     var index = groupHead(this, null, headconfig, rowIndex);
                 }
                 return this;
             }
+
             //给对象注册分组函数。
             this.group = group;
             this.group(options["head"], options["column"]);
             return this;
         }
     });
-    
+
 })(jQuery);

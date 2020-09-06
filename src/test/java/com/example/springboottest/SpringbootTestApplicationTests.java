@@ -15,16 +15,16 @@ import java.util.List;
 public class SpringbootTestApplicationTests {
 
     @Test
-   public void contextLoads() {
+    public void contextLoads() {
 
-            List<User> list = new ArrayList<>();
-            User student0=new User(1,"kobe","kobe","123","user-add");
-            User student1=new User(2,"james","james","123","user-add");
-            User student2=new User(3,"rose","rose","123","user-add");
+        List<User> list = new ArrayList<>();
+        User student0 = new User(1, "kobe", "kobe", "123", "user-add");
+        User student1 = new User(2, "james", "james", "123", "user-add");
+        User student2 = new User(3, "rose", "rose", "123", "user-add");
 
-            list.add(student0);
-            list.add(student1);
-            list.add(student2);
+        list.add(student0);
+        list.add(student1);
+        list.add(student2);
 
 //            return list;
 

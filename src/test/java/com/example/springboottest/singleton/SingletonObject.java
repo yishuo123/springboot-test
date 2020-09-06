@@ -8,11 +8,11 @@ public class SingletonObject {
 
     private static SingletonObject singletonObject = null;
 
-    public static  SingletonObject getInstance(){
-        if(singletonObject == null){
-            synchronized (SingletonObject.class){
-                if(singletonObject == null){
-                    singletonObject =  new SingletonObject();
+    public static SingletonObject getInstance() {
+        if (singletonObject == null) {
+            synchronized (SingletonObject.class) {
+                if (singletonObject == null) {
+                    singletonObject = new SingletonObject();
                 }
             }
         }

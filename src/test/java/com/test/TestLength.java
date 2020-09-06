@@ -4,8 +4,7 @@ public class TestLength {
     public static void main(String[] args) {
         int[] myArray = {1, 2, 3, 4, 5};
         doIt(myArray);
-        for (int i = 0; i < myArray.length; i++)
-        {
+        for (int i = 0; i < myArray.length; i++) {
             System.out.print(myArray[i] + " ");
         }
 
@@ -17,13 +16,11 @@ public class TestLength {
     }
 
 
-        static void doIt( int[] z )
-        {
-            int temp = z[z.length-1];
-            z[z.length-1] = z[0];
-            z[0] = temp;
-        }
-
+    static void doIt(int[] z) {
+        int temp = z[z.length - 1];
+        z[z.length - 1] = z[0];
+        z[0] = temp;
+    }
 
 
     public static void swap(Integer i, Integer j) {

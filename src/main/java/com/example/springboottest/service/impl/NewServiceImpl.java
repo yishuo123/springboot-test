@@ -16,8 +16,8 @@ public class NewServiceImpl implements NewService {
     private NewMapper newMapper;
 
     @Override
-    public List<taskRule> findAll()throws Exception {
-        List<taskRule> taskRuleList= newMapper.findAll();
+    public List<taskRule> findAll() throws Exception {
+        List<taskRule> taskRuleList = newMapper.findAll();
         return taskRuleList;
     }
 }

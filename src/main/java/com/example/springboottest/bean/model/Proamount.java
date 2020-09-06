@@ -59,7 +59,6 @@ public class Proamount {
      * This method returns the value of the database column t_proamount.id
      *
      * @return the value of t_proamount.id
-     *
      * @mbggenerated
      */
     public Long getId() {
@@ -71,7 +70,6 @@ public class Proamount {
      * This method sets the value of the database column t_proamount.id
      *
      * @param id the value for t_proamount.id
-     *
      * @mbggenerated
      */
     public void setId(Long id) {
@@ -83,7 +81,6 @@ public class Proamount {
      * This method returns the value of the database column t_proamount.project_number
      *
      * @return the value of t_proamount.project_number
-     *
      * @mbggenerated
      */
     public String getProjectNumber() {
@@ -95,7 +92,6 @@ public class Proamount {
      * This method sets the value of the database column t_proamount.project_number
      *
      * @param projectNumber the value for t_proamount.project_number
-     *
      * @mbggenerated
      */
     public void setProjectNumber(String projectNumber) {
@@ -107,7 +103,6 @@ public class Proamount {
      * This method returns the value of the database column t_proamount.amount
      *
      * @return the value of t_proamount.amount
-     *
      * @mbggenerated
      */
     public Float getAmount() {
@@ -119,7 +114,6 @@ public class Proamount {
      * This method sets the value of the database column t_proamount.amount
      *
      * @param amount the value for t_proamount.amount
-     *
      * @mbggenerated
      */
     public void setAmount(Float amount) {
@@ -131,7 +125,6 @@ public class Proamount {
      * This method returns the value of the database column t_proamount.receipt_number
      *
      * @return the value of t_proamount.receipt_number
-     *
      * @mbggenerated
      */
     public String getReceiptNumber() {
@@ -143,7 +136,6 @@ public class Proamount {
      * This method sets the value of the database column t_proamount.receipt_number
      *
      * @param receiptNumber the value for t_proamount.receipt_number
-     *
      * @mbggenerated
      */
     public void setReceiptNumber(String receiptNumber) {
@@ -155,7 +147,6 @@ public class Proamount {
      * This method returns the value of the database column t_proamount.operator
      *
      * @return the value of t_proamount.operator
-     *
      * @mbggenerated
      */
     public String getOperator() {
@@ -167,7 +158,6 @@ public class Proamount {
      * This method sets the value of the database column t_proamount.operator
      *
      * @param operator the value for t_proamount.operator
-     *
      * @mbggenerated
      */
     public void setOperator(String operator) {
@@ -179,7 +169,6 @@ public class Proamount {
      * This method returns the value of the database column t_proamount.opedate
      *
      * @return the value of t_proamount.opedate
-     *
      * @mbggenerated
      */
     public Date getOpedate() {
@@ -191,7 +180,6 @@ public class Proamount {
      * This method sets the value of the database column t_proamount.opedate
      *
      * @param opedate the value for t_proamount.opedate
-     *
      * @mbggenerated
      */
     public void setOpedate(Date opedate) {

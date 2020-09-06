@@ -11,8 +11,8 @@
 
 <p>${msg!''}</p>
 <form method="post" action="/user/loginInfo">
-    用户名<input name="name" type="text" > <br/>
-    密码<input name="password" type="text" > <br/>
+    用户名<input name="name" type="text"> <br/>
+    密码<input name="password" type="text"> <br/>
     <input type="submit" value="登录">
 </form>
 </body>

@@ -7,18 +7,18 @@ public class Test {
 
     public static void main(String[] args) {
 
-        Integer[] datas = {5,1,3,3,3,3,6,6,6,6,3};
+        Integer[] datas = {5, 1, 3, 3, 3, 3, 6, 6, 6, 6, 3};
         int[] nums = new int[10];//0-9,此处若数组中的最大值为 123，则数组长度应为 >= 124
 
         System.out.println(datas.length);
 
         System.out.println("------------");
         for (int i = 0; i < datas.length; i++) {
-            System.out.println(i+":"+datas[i]);
+            System.out.println(i + ":" + datas[i]);
             int n = datas[i] - 0;
 //            int n = datas[i];
             nums[n]++;
-            System.out.println("新的数组是： "+nums);
+            System.out.println("新的数组是： " + nums);
 //            System.out.println("nums : "+nums[n]);
         }
         System.out.println("======================");
@@ -29,10 +29,10 @@ public class Test {
             integers[i] = new Integer(nums[i]);
         }
 
-        int  min = (int) Collections.min(Arrays.asList(integers));
-        int max = (int)Collections.max(Arrays.asList(integers));
-        System.out.println("最小值为："+min);
-        System.out.println("最大值为："+max);
+        int min = (int) Collections.min(Arrays.asList(integers));
+        int max = (int) Collections.max(Arrays.asList(integers));
+        System.out.println("最小值为：" + min);
+        System.out.println("最大值为：" + max);
 
 
 //        int maxTime = 0;

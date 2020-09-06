@@ -1,57 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.springboottest.dao.RoleInfoMapper">
-	<resultMap type="com.example.springboottest.bean.model.RoleInfo" id="roleInfoMap">
-		<id column="id" property="id" jdbcType="BIGINT"/>
-		<result column="role_name" property="roleName" jdbcType="VARCHAR"/>
-		<result column="role_code" property="roleCode" jdbcType="INTEGER"/>
-	</resultMap>
-	
-	<!-- 列 -->
-	<sql id="Base_Column_List">
-		id,role_name,role_code
-	</sql>
+    <resultMap type="com.example.springboottest.bean.model.RoleInfo" id="roleInfoMap">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_code" property="roleCode" jdbcType="INTEGER"/>
+    </resultMap>
 
-	<!-- 添加角色信息 -->
-	<insert id="add" parameterType="com.example.springboottest.bean.model.RoleInfo">
-		INSERT INTO t_role( <include refid="Base_Column_List"/> )
-		VALUES(
-		#{id, jdbcType=BIGINT },
-		#{roleName, jdbcType=VARCHAR },
-		#{roleCode, jdbcType=VARCHAR }
-		)
-	</insert>
+    <!-- 列 -->
+    <sql id="Base_Column_List">
+        id,role_name,role_code
+    </sql>
 
-	<!-- 效验角色名是否存在 -->
-	<select id="existroleName" parameterType="String" resultType="com.example.springboottest.bean.model.RoleInfo">
-		SELECT id,role_name,role_code FROM  t_role
-		WHERE role_name = #{roleName,jdbcType=VARCHAR}
+    <!-- 添加角色信息 -->
+    <insert id="add" parameterType="com.example.springboottest.bean.model.RoleInfo">
+        INSERT INTO t_role(
+        <include refid="Base_Column_List"/>
+        )
+        VALUES(
+        #{id, jdbcType=BIGINT },
+        #{roleName, jdbcType=VARCHAR },
+        #{roleCode, jdbcType=VARCHAR }
+        )
+    </insert>
 
-	</select>
-	<!-- 修改角色信息 -->
-	<update id="update" parameterType="com.example.springboottest.bean.model.RoleInfo">
-		UPDATE t_role
-		SET role_name = #{roleName, jdbcType=VARCHAR },
-		role_code = #{roleCode, jdbcType=VARCHAR }
-		WHERE id = #{id, jdbcType=BIGINT }
-	</update>
+    <!-- 效验角色名是否存在 -->
+    <select id="existroleName" parameterType="String" resultType="com.example.springboottest.bean.model.RoleInfo">
+        SELECT id,role_name,role_code FROM t_role
+        WHERE role_name = #{roleName,jdbcType=VARCHAR}
 
-	<!-- 获取角色信息 -->
-	<select id="getRoleInfo" resultMap="roleInfoMap">
-		SELECT <include refid="Base_Column_List"/> FROM t_role
-		WHERE 1=1 
-		<if test="roleName != null and roleName != ''">
-			and role_name like '%${roleName}%'
-		</if>
-		ORDER BY role_code;
-	</select>
+    </select>
+    <!-- 修改角色信息 -->
+    <update id="update" parameterType="com.example.springboottest.bean.model.RoleInfo">
+        UPDATE t_role
+        SET role_name = #{roleName, jdbcType=VARCHAR },
+        role_code = #{roleCode, jdbcType=VARCHAR }
+        WHERE id = #{id, jdbcType=BIGINT }
+    </update>
 
-	<!-- 删除角色信息 -->
-	<delete id="del">
-		DELETE FROM t_role WHERE id IN
-		<foreach collection="array" item="item" open="(" separator="," close=")" >
-			#{item}
-		</foreach>
-	</delete>
-	
+    <!-- 获取角色信息 -->
+    <select id="getRoleInfo" resultMap="roleInfoMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_role
+        WHERE 1=1
+        <if test="roleName != null and roleName != ''">
+            and role_name like '%${roleName}%'
+        </if>
+        ORDER BY role_code;
+    </select>
+
+    <!-- 删除角色信息 -->
+    <delete id="del">
+        DELETE FROM t_role WHERE id IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
 </mapper>

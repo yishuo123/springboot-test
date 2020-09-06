@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
+
 @Configuration
 @EnableAsync  // 开始异步请求
 public class AsyncTaskConfig implements AsyncConfigurer {

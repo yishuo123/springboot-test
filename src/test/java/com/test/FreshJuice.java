@@ -2,7 +2,7 @@ package com.test;
 
 import java.util.Scanner;
 
-public class   FreshJuice {
+public class FreshJuice {
 //     enum FreshJuiceSize{ SMALL, MEDIUM , LARGE }
 
     public static void main(String[] args) {
@@ -18,7 +18,6 @@ public class   FreshJuice {
         }
         scan.close();
     }
-
 
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
  * 分页使用的工具类
  */
 public class Page<E> implements Serializable {
-    private static final long  serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public static final Integer DEFAULT_MAX_RESULT = 10;
     public static final Integer DEFAULT_TOTAL_RESULT = 0;

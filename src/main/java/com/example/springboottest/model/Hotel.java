@@ -1,7 +1,7 @@
 package com.example.springboottest.model;
 
 public class Hotel {
-    private  int id;
+    private int id;
     private String name;
     private String content;
 

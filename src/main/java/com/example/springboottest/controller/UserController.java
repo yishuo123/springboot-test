@@ -39,15 +39,15 @@ public class UserController extends BaseResult {
 
     @RequestMapping("/selectAll")
     @ResponseBody
-    public Page<Map<String,Object>> selectAll(User user,
-            @RequestParam(value = "page",defaultValue = "1") Integer page,
-            @RequestParam(value = "rows", defaultValue = "10") Integer rows){
+    public Page<Map<String, Object>> selectAll(User user,
+                                               @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                               @RequestParam(value = "rows", defaultValue = "10") Integer rows) {
 
-        Page<Map<String,Object>> pages  = new Page<Map<String, Object>>();
+        Page<Map<String, Object>> pages = new Page<Map<String, Object>>();
 
         try {
 
-            Map<String,Object> map = getMapParams(user,page,rows);
+            Map<String, Object> map = getMapParams(user, page, rows);
 
             // 从数据库中查询
             pages = userService.selectAll(map);
@@ -55,24 +55,24 @@ public class UserController extends BaseResult {
             pages.setPageIndex(page);
             pages.setMaxResult(rows);
 
-        }catch (Exception e){
-            log.error("selectAll error" , e);
+        } catch (Exception e) {
+            log.error("selectAll error", e);
         }
         return pages;
 
     }
 
-    private Map<String, Object> getMapParams(User user, Integer page, Integer rows){
+    private Map<String, Object> getMapParams(User user, Integer page, Integer rows) {
 
         Map<String, Object> params = new HashMap<String, Object>();
 
-        if(user != null){
-            if(!user.getName().equals("")){
-                params.put("name", "%"+ user.getName() +"%");
+        if (user != null) {
+            if (!user.getName().equals("")) {
+                params.put("name", "%" + user.getName() + "%");
             }
         }
 
-        params.put("page", (page-1) * rows);
+        params.put("page", (page - 1) * rows);
         params.put("rows", rows);
 
         return params;
@@ -83,70 +83,79 @@ public class UserController extends BaseResult {
     @WebLogger("登录的逻辑层")
     @RequestMapping("/add")
     @ResponseBody
-    public BaseResult add(){
+    public BaseResult add() {
         BaseResult baseResult = new BaseResult();
         baseResult.setState(BaseResult.MESSAGE_ERROR);
-        try{
+        try {
             // 执行完成
 
             baseResult.setState(BaseResult.MESSAGE_ERROR);
 
-        }catch (Exception e){
-        log.error("add error " , e);
+        } catch (Exception e) {
+            log.error("add error ", e);
         }
         return baseResult;
     }
 
 
     @RequestMapping("/findAll")
-    public void findAll(){
+    public void findAll() {
         List<User> userList = userService.findAll();
         System.out.println(userList);
     }
 
     /**
      * 拦截后跳转的页面
+     *
      * @return
      */
     @RequestMapping("/tologin")
-    public String tologin(){return "user/info";}
+    public String tologin() {
+        return "user/info";
+    }
 
     /**
      * 用户登录跳转的也面
+     *
      * @return
      */
     @RequestMapping("/login")
-    public String findUserInfo() { return "user/login";}
+    public String findUserInfo() {
+        return "user/login";
+    }
 
     /**
      * 用户添加
+     *
      * @return
      */
     @RequestMapping("/insert")
-    public String insert(){
+    public String insert() {
         return "user/insert";
     }
 
     /**
      * 用户修改
+     *
      * @return
      */
     @RequestMapping("/update")
-    public String update(){
+    public String update() {
         return "user/update";
     }
 
     /**
      * 未授权跳转的页面
+     *
      * @return
      */
     @RequestMapping("/noAuthc")
-    public String noAuthc(){
+    public String noAuthc() {
         return "user/noAuthc";
     }
 
     @RequestMapping("/loginInfo")
-    public String loginInfo(String name , String password, Model model){
+    public String loginInfo(String name, String password, Model model) {
 
         /**
          * 使用Shiro  认证操作
@@ -154,7 +163,7 @@ public class UserController extends BaseResult {
         Subject subject = SecurityUtils.getSubject();
 
         // 封装用户数据
-        UsernamePasswordToken token = new UsernamePasswordToken(name,password);
+        UsernamePasswordToken token = new UsernamePasswordToken(name, password);
 
         try {
 
@@ -163,11 +172,11 @@ public class UserController extends BaseResult {
         } catch (UnknownAccountException e) {
 //            e.printStackTrace();
             //用户名不存在
-            model.addAttribute("msg","用户名错误");
+            model.addAttribute("msg", "用户名错误");
             return "user/info";
-        }catch (IncorrectCredentialsException e){
+        } catch (IncorrectCredentialsException e) {
             //密码错误
-            model.addAttribute("msg","密码错误");
+            model.addAttribute("msg", "密码错误");
             return "user/info";
         }
 
@@ -176,10 +185,11 @@ public class UserController extends BaseResult {
 
     /**
      * 导入
+     *
      * @param myFile
      * @return
      */
-    @RequestMapping(value="/importExcel",method= RequestMethod.POST)
+    @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public String importExcel(@RequestParam("myfile") MultipartFile myFile) {
         ModelAndView modelAndView = new ModelAndView();
         try {
@@ -195,9 +205,10 @@ public class UserController extends BaseResult {
 
     /**
      * 导出
+     *
      * @param response
      */
-    @RequestMapping(value="/exportExcel",method=RequestMethod.GET)
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
     public void exportExcel(HttpServletResponse response) {
         try {
             userService.exportExcel(response);
@@ -205,8 +216,6 @@ public class UserController extends BaseResult {
             e.printStackTrace();
         }
     }
-
-
 
 
 }

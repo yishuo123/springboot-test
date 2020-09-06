@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface NewService {
 
-    List<taskRule> findAll()throws Exception;
+    List<taskRule> findAll() throws Exception;
 }

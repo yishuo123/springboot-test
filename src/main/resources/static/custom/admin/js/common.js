@@ -1,51 +1,51 @@
 /**
  *根据id批量删除菜单
  */
-function delInfo(tn, u, names, ids){
+function delInfo(tn, u, names, ids) {
 
-        $("#ids-name").html(names);
+    $("#ids-name").html(names);
 
-        $("#dialog-confirm").removeClass('hide').dialog({
-            resizable: false,
-            modal: true,
-            title: "确认"+tn,
-            title_html: true,
-            buttons: [
-                {
-                    html: "<i class='ace-icon fa fa-check'></i>&nbsp;确定&nbsp;",
-                    "class" : "btn btn-success btn-xs",
-                    click: function() {
-                        $.ajax({
-                            url: u,
-                            traditional: true,			//ajax 发送数组请求
-                            data: {'ids': ids },
-                            dataType: 'json',
-                            success: function(data){
-                                data = eval(data);
+    $("#dialog-confirm").removeClass('hide').dialog({
+        resizable: false,
+        modal: true,
+        title: "确认" + tn,
+        title_html: true,
+        buttons: [
+            {
+                html: "<i class='ace-icon fa fa-check'></i>&nbsp;确定&nbsp;",
+                "class": "btn btn-success btn-xs",
+                click: function () {
+                    $.ajax({
+                        url: u,
+                        traditional: true,			//ajax 发送数组请求
+                        data: {'ids': ids},
+                        dataType: 'json',
+                        success: function (data) {
+                            data = eval(data);
 
-                                if(data.state == 1){
-                                    $.scojs_message(tn+"成功！", $.scojs_message.TYPE_OK);
-                                    search();
+                            if (data.state == 1) {
+                                $.scojs_message(tn + "成功！", $.scojs_message.TYPE_OK);
+                                search();
 
-                                }else{
-                                    $.scojs_message(data.message, $.scojs_message.TYPE_ERROR);
-                                }
-                            },
-                            error: function(){
-                                $.scojs_message(tn+"失败！", $.scojs_message.TYPE_ERROR);
+                            } else {
+                                $.scojs_message(data.message, $.scojs_message.TYPE_ERROR);
                             }
-                        });
-                        $( this ).dialog( "close" );
-                    }
-                }, {
-                    html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp;取消&nbsp;",
-                    "class" : "btn btn-xs",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                    }
+                        },
+                        error: function () {
+                            $.scojs_message(tn + "失败！", $.scojs_message.TYPE_ERROR);
+                        }
+                    });
+                    $(this).dialog("close");
                 }
-            ]
-        });
+            }, {
+                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp;取消&nbsp;",
+                "class": "btn btn-xs",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            }
+        ]
+    });
 }
 
 /**
@@ -56,7 +56,7 @@ function delInfo(tn, u, names, ids){
  * @param formId
  * @param html
  */
-function dialogForm(width, height, title, formId, html){
+function dialogForm(width, height, title, formId, html) {
 
     $("#dialog-content").html();
     $("#dialog-content").html(html);
@@ -71,21 +71,21 @@ function dialogForm(width, height, title, formId, html){
         buttons: [
             {
                 html: "<i class='ace-icon fa fa-check'></i>&nbsp;保存",
-                "class" : "btn btn-success btn-xs",
-                click: function() {
+                "class": "btn btn-success btn-xs",
+                click: function () {
                     //校验form表单
-                    if(!$('#'+formId).valid()){
+                    if (!$('#' + formId).valid()) {
                         return false;
-                    }else{
+                    } else {
 
-                        $("#"+formId).ajaxSubmit(function(data){
+                        $("#" + formId).ajaxSubmit(function (data) {
                             data = eval(data);
 
-                            if(data.state == 1){
-                                $("#dialog-form").dialog( "close" );
+                            if (data.state == 1) {
+                                $("#dialog-form").dialog("close");
                                 search();
 
-                            }else{
+                            } else {
                                 $("#error-msg-text").text(data.message);
                                 $("#error-msg").removeClass('hide');
                             }
@@ -96,10 +96,10 @@ function dialogForm(width, height, title, formId, html){
             ,
             {
                 html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class" : "btn btn-xs",
-                click: function() {
+                "class": "btn btn-xs",
+                click: function () {
 
-                    $( this ).dialog( "close" );
+                    $(this).dialog("close");
                 }
             }
         ]
@@ -111,5 +111,5 @@ function dialogForm(width, height, title, formId, html){
  */
 function setMainHeight(height) {
 
-    $("#contentFrame", window.top.document).css("height", height+"px");
+    $("#contentFrame", window.top.document).css("height", height + "px");
 }

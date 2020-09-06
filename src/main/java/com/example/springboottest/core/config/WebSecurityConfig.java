@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 @Configuration
 public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
-    public SecurityInterceptor getSecurityInterceptor(){
+    public SecurityInterceptor getSecurityInterceptor() {
         return new SecurityInterceptor();
     }
 
@@ -44,14 +44,14 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
                 throws Exception {
             HttpSession session = request.getSession();
-            if (session.getAttribute(Const.SESSION_USERINFO) != null){
+            if (session.getAttribute(Const.SESSION_USERINFO) != null) {
 
                 return true;
             }
 
             //获取http路径
             String path = request.getContextPath();
-            String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+            String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 
 
             // 跳转登录
@@ -63,18 +63,19 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 通过设置html，方式iframe不能正确跳转
+     *
      * @param response
      * @param basePath
      * @throws Exception
      */
     private void sendRedirect(HttpServletResponse response,
-                              String basePath)throws Exception{
+                              String basePath) throws Exception {
 
         PrintWriter out = response.getWriter();
         out.println("<html>");
         out.println("<script>");
 //        out.println("window.open ('"+ basePath +"login','_top')");
-        out.println("window.top.location='"+ basePath +"login'");
+        out.println("window.top.location='" + basePath + "login'");
         out.println("</script>");
         out.println("</html>");
     }

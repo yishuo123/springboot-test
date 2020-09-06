@@ -18,8 +18,10 @@ public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+
     /**
      * 执行授权的逻辑
+     *
      * @param principalCollection
      * @return
      */
@@ -34,7 +36,7 @@ public class UserRealm extends AuthorizingRealm {
         //动态连接数据库来实行授权
         // 获取当前用户的id
         Subject subject = SecurityUtils.getSubject();
-        User user =(User) subject.getPrincipal();
+        User user = (User) subject.getPrincipal();
         User dbUser = userService.getById(user.getId());
 
         // 将查询出来的结果动态放在
@@ -45,6 +47,7 @@ public class UserRealm extends AuthorizingRealm {
 
     /**
      * 执行认证的逻辑
+     *
      * @param authenticationToken
      * @return
      * @throws AuthenticationException
@@ -54,14 +57,14 @@ public class UserRealm extends AuthorizingRealm {
         System.out.println("执行认证的逻辑");
 
 
-        UsernamePasswordToken token =(UsernamePasswordToken)authenticationToken;
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         User user = userService.findByName(token.getUsername());
 
-        if(user == null){
+        if (user == null) {
             // 用户不存在 抛出异常
             return null;
         }
         //判断密码
-        return new SimpleAuthenticationInfo(user,user.getPassWord(),"");
+        return new SimpleAuthenticationInfo(user, user.getPassWord(), "");
     }
 }

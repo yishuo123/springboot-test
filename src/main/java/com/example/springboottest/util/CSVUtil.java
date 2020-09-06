@@ -48,15 +48,11 @@ public class CSVUtil {
     }
 
 
-
     /**
-
      * 读取csv文件用list对象存储的公共调用方法
-
+     *
      * @param inpath csv文件存储路径
-
      * @return 返回List<taskRule>对象
-
      */
     public static List<taskRule> readCsv(String inpath) {
 
@@ -76,7 +72,7 @@ public class CSVUtil {
 
                 DataInputStream in = new DataInputStream(new FileInputStream(file));
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in,"GBK")); // 读取CSV文件
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in, "GBK")); // 读取CSV文件
 
                 String line = null;// 循环读取每行
                 String splitBy = ",";
@@ -105,35 +101,35 @@ public class CSVUtil {
 
     /**
      * 把 CSV  文件写入到 txt文件
-     * @param inpath  路径
+     *
+     * @param inpath 路径
      * @throws Exception
      */
-    public static void readCSVWriteTxt(String inpath)throws Exception{
+    public static void readCSVWriteTxt(String inpath) throws Exception {
 
         // CSV 文件路径
         List<taskRule> taskRulesList = readCsv(inpath);
 
         //循环list 里面的内容
-        for (int i = 0; i <taskRulesList.size() ; i++) {
+        for (int i = 0; i < taskRulesList.size(); i++) {
             taskRule taskRule = taskRulesList.get(i);
             String name = taskRule.getName();
             String content = taskRule.getContent();
-            String nameContent = name +"\r\n"+content;
+            String nameContent = name + "\r\n" + content;
 
             //去掉 html的标签
-            String  replaceAllContent = StringUtil.removeHTMLLabel(nameContent);
+            String replaceAllContent = StringUtil.removeHTMLLabel(nameContent);
 
             // 去掉特殊字符
-            String  newStr = StringUtil.removeSpecifiedStr(replaceAllContent);
+            String newStr = StringUtil.removeSpecifiedStr(replaceAllContent);
 
             // 创建文件， 写入文件中
-            txtExport.creatTxtFile(i+1);
+            txtExport.creatTxtFile(i + 1);
             // 写入内容
             txtExport.writeTxtFile(newStr);
         }
 
     }
-
 
 
 }

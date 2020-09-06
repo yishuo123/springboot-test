@@ -1,198 +1,202 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.springboottest.dao.UserInfoMapper">
-	<resultMap type="com.example.springboottest.bean.model.UserInfo" id="userInfoMap">
-		<id column="id" property="id" jdbcType="BIGINT"/>
-		<result column="user_name" property="userName" jdbcType="VARCHAR"/>
-		<result column="phone" property="phone" jdbcType="VARCHAR"/>
-		<result column="real_name" property="realName" jdbcType="VARCHAR"/>
-		<result column="role_id" property="roleId" jdbcType="BIGINT"/>
-		<result column="status" property="status" jdbcType="INTEGER"/>
-		<result column="create_by" property="createBy" jdbcType="VARCHAR"/>
-		<result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-		<result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
-		<result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP"/>
-		<result column="remark" property="remark" jdbcType="VARCHAR"/>
-		<result column="role_name" property="roleName" jdbcType="VARCHAR"/>
-		<result column="password" property="password" jdbcType="VARCHAR"/>
-	</resultMap>
+    <resultMap type="com.example.springboottest.bean.model.UserInfo" id="userInfoMap">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="modify_by" property="modifyBy" jdbcType="VARCHAR"/>
+        <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+    </resultMap>
 
-	<!-- 列 -->
-	<sql id="Base_Column_List">
-		id,user_name,password,phone,real_name,role_id,status,
-			create_by,create_date,modify_by,modify_date,remark
-	</sql>
+    <!-- 列 -->
+    <sql id="Base_Column_List">
+        id,user_name,password,phone,real_name,role_id,status,
+        create_by,create_date,modify_by,modify_date,remark
+    </sql>
 
-	<!-- 根据用户id 查找用户信息 -->
-	<select id="selectUserInfoById"  resultMap="userInfoMap">
-		SELECT
-			<include refid="Base_Column_List"/>
-		FROM t_user
-		WHERE id = #{id}
-	</select>
+    <!-- 根据用户id 查找用户信息 -->
+    <select id="selectUserInfoById" resultMap="userInfoMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+        WHERE id = #{id}
+    </select>
 
-	<!-- 添加会员信息 -->
-	<!--
-			FROM t.user
-			WHERE id = #{id, jdbcType=BIGINT }
+    <!-- 添加会员信息 -->
+    <!--
+            FROM t.user
+            WHERE id = #{id, jdbcType=BIGINT }
 
-			-->
-	<insert id="add" parameterType="com.example.springboottest.bean.model.UserInfo">
+            -->
+    <insert id="add" parameterType="com.example.springboottest.bean.model.UserInfo">
 
-		INSERT INTO t_user(
-			<include refid="Base_Column_List"/>
-		)
-		VALUES(
-			#{id, jdbcType=BIGINT },
-			#{userName, jdbcType=VARCHAR },
-			#{password, jdbcType=VARCHAR },
-			#{phone, jdbcType=VARCHAR },
-			#{realName, jdbcType=VARCHAR },
-			#{roleId, jdbcType=INTEGER },
-			#{status, jdbcType=INTEGER },
-			#{createBy, jdbcType=VARCHAR },
-			#{createDate, jdbcType=TIMESTAMP },
-			#{modifyBy, jdbcType=VARCHAR },
-			#{modifyDate, jdbcType=TIMESTAMP },
-			#{remark, jdbcType=VARCHAR }
-
-
-		)
-	</insert>
-
-	<!-- 查询user表 -->
-	<sql id="form_user">
-		SELECT <include refid="Base_Column_List"/>  FROM t_user
-	</sql>
-	<!-- 效验用户是否存在 -->
-	<select id="existUserName" parameterType="String" resultType="com.example.springboottest.bean.model.UserInfo">
-		<include refid="form_user"/>
-		WHERE user_name = #{userName,jdbcType=VARCHAR}
-
-	</select>
-
-	<!-- 根据用户名和密码查询用户 -->
-	<select id="findUserInfoByUserNameAndPwd" resultMap="userInfoMap">
-		<include refid="form_user"/>
-		WHERE user_name = #{userName, jdbcType=VARCHAR} AND password = #{pwd, jdbcType=VARCHAR}
-	</select>
-
-	<!-- 根据条件分页查询数据 -->
-	<select id="selectUserInfoByParams" parameterType="java.util.Map" resultMap="userInfoMap">
-		SELECT u.id,
-		u.user_name,
-		u.password,
-		u.phone,
-		r.role_name,
-		u.status,
-		u.create_by,
-		u.create_date,
-		u.modify_by,
-		u.modify_date,
-		u.remark,
-		u.real_name
-		from t_user u left join  t_role r
-		on u.role_id = r.id
-		WHERE 1=1
-
-		<if test="userName != null and userName != ''">
-			and u.user_name like #{userName}
-		</if>
-		<if test="phone != null and phone != ''">
-			and u.phone like #{phone}
-		</if>
-		<if test="status != null and status != ''">
-			and u.status like #{status}
-		</if>
-		ORDER BY create_date DESC
-		limit #{page }, #{rows }
-	</select>
-
-	<!-- 根据条件查询数据总数，用于分页 -->
-	<select id="selectCountUserInfoByParams" parameterType="java.util.Map" resultType="java.lang.Integer">
-		SELECT COUNT(1) FROM t_user
-		<include refid="selectParams" />
-	</select>
-
-	<!-- 查询条件 -->
-	<sql id="selectParams">
-		where 1=1
-		<if test="userName != null and userName != ''">
-			and user_name like #{userName}
-		</if>
-		<if test="phone != null and phone != ''">
-			and phone like #{phone}
-		</if>
-
-	</sql>
-
-	<!-- 判断手机号是否存在 -->
-	<select id="findUserInfoByPhoneOrUserName" parameterType="java.util.Map" resultType="com.example.springboottest.bean.model.UserInfo">
-		<include refid="form_user"/> WHERE 1=1
-
-		<if test="phone != null and phone != ''">
-			and phone = #{phone}
-		</if>
-	</select>
-
-	<!-- 根据uid修改用户密码 -->
-	<update id="updatePwd" >
-		UPDATE t_user SET
-		password = #{pwd, jdbcType=VARCHAR}
-		WHERE id = #{id, jdbcType=BIGINT}
-	</update>
-
-	<!-- 根据uid修改真实姓名 -->
-	<update id="updateRealName" >
-		UPDATE t_user SET
-		real_name = #{realName, jdbcType=VARCHAR}
-		WHERE id = #{id, jdbcType=BIGINT}
-	</update>
-
-	<!-- 修改用户信息 -->
-	<update id="updateByid" parameterType="com.example.springboottest.bean.model.UserInfo">
-		UPDATE t_user
-		SET user_name = #{userName, jdbcType=VARCHAR },
-		phone = #{phone, jdbcType=VARCHAR },
-		real_Name = #{realName, jdbcType=VARCHAR },
-		role_Id = #{roleId, jdbcType=INTEGER},
-		modify_By = #{modifyBy, jdbcType=VARCHAR },
-		modify_Date = #{modifyDate, jdbcType=TIMESTAMP },
-		remark = #{remark, jdbcType=VARCHAR }
-		WHERE id = #{id, jdbcType=BIGINT }
-	</update>
-	<!-- 禁用用户登录信息 -->
-	<update id="fordenUserInfoById" >
-		UPDATE t_user SET
-		status = 2
-		WHERE id IN
-		<foreach collection="array" item="item" open="(" separator="," close=")" >
-			#{item}
-		</foreach>
-	</update>
-	<!-- 启用用户登录信息 -->
-	<update id="openUserInfoById" parameterType="Long">
-		UPDATE t_user SET
-		status = 1
-		WHERE id IN
-		<foreach collection="array" item="item" open="(" separator="," close=")" >
-			#{item}
-		</foreach>
-	</update>
-
-	<!-- 删除用户信息 -->
-	<delete id="delUserInfo">
-		DELETE FROM t_user WHERE id IN
-		<foreach collection="array" item="item" open="(" separator="," close=")" >
-			#{item}
-		</foreach>
-	</delete>
+        INSERT INTO t_user(
+        <include refid="Base_Column_List"/>
+        )
+        VALUES(
+        #{id, jdbcType=BIGINT },
+        #{userName, jdbcType=VARCHAR },
+        #{password, jdbcType=VARCHAR },
+        #{phone, jdbcType=VARCHAR },
+        #{realName, jdbcType=VARCHAR },
+        #{roleId, jdbcType=INTEGER },
+        #{status, jdbcType=INTEGER },
+        #{createBy, jdbcType=VARCHAR },
+        #{createDate, jdbcType=TIMESTAMP },
+        #{modifyBy, jdbcType=VARCHAR },
+        #{modifyDate, jdbcType=TIMESTAMP },
+        #{remark, jdbcType=VARCHAR }
 
 
-	<!-- 重置用户密码信息 -->
-	<update id="resUserInfoById" parameterType="Long">
-		UPDATE t_user SET
-		password = '96e79218965eb72c92a549dd5a330112'
-		WHERE id = #{rowid, jdbcType=BIGINT}
-	</update>
+        )
+    </insert>
+
+    <!-- 查询user表 -->
+    <sql id="form_user">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+    </sql>
+    <!-- 效验用户是否存在 -->
+    <select id="existUserName" parameterType="String" resultType="com.example.springboottest.bean.model.UserInfo">
+        <include refid="form_user"/>
+        WHERE user_name = #{userName,jdbcType=VARCHAR}
+
+    </select>
+
+    <!-- 根据用户名和密码查询用户 -->
+    <select id="findUserInfoByUserNameAndPwd" resultMap="userInfoMap">
+        <include refid="form_user"/>
+        WHERE user_name = #{userName, jdbcType=VARCHAR} AND password = #{pwd, jdbcType=VARCHAR}
+    </select>
+
+    <!-- 根据条件分页查询数据 -->
+    <select id="selectUserInfoByParams" parameterType="java.util.Map" resultMap="userInfoMap">
+        SELECT u.id,
+        u.user_name,
+        u.password,
+        u.phone,
+        r.role_name,
+        u.status,
+        u.create_by,
+        u.create_date,
+        u.modify_by,
+        u.modify_date,
+        u.remark,
+        u.real_name
+        from t_user u left join t_role r
+        on u.role_id = r.id
+        WHERE 1=1
+
+        <if test="userName != null and userName != ''">
+            and u.user_name like #{userName}
+        </if>
+        <if test="phone != null and phone != ''">
+            and u.phone like #{phone}
+        </if>
+        <if test="status != null and status != ''">
+            and u.status like #{status}
+        </if>
+        ORDER BY create_date DESC
+        limit #{page }, #{rows }
+    </select>
+
+    <!-- 根据条件查询数据总数，用于分页 -->
+    <select id="selectCountUserInfoByParams" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM t_user
+        <include refid="selectParams"/>
+    </select>
+
+    <!-- 查询条件 -->
+    <sql id="selectParams">
+        where 1=1
+        <if test="userName != null and userName != ''">
+            and user_name like #{userName}
+        </if>
+        <if test="phone != null and phone != ''">
+            and phone like #{phone}
+        </if>
+
+    </sql>
+
+    <!-- 判断手机号是否存在 -->
+    <select id="findUserInfoByPhoneOrUserName" parameterType="java.util.Map"
+            resultType="com.example.springboottest.bean.model.UserInfo">
+        <include refid="form_user"/>
+        WHERE 1=1
+
+        <if test="phone != null and phone != ''">
+            and phone = #{phone}
+        </if>
+    </select>
+
+    <!-- 根据uid修改用户密码 -->
+    <update id="updatePwd">
+        UPDATE t_user SET
+        password = #{pwd, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <!-- 根据uid修改真实姓名 -->
+    <update id="updateRealName">
+        UPDATE t_user SET
+        real_name = #{realName, jdbcType=VARCHAR}
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+    <!-- 修改用户信息 -->
+    <update id="updateByid" parameterType="com.example.springboottest.bean.model.UserInfo">
+        UPDATE t_user
+        SET user_name = #{userName, jdbcType=VARCHAR },
+        phone = #{phone, jdbcType=VARCHAR },
+        real_Name = #{realName, jdbcType=VARCHAR },
+        role_Id = #{roleId, jdbcType=INTEGER},
+        modify_By = #{modifyBy, jdbcType=VARCHAR },
+        modify_Date = #{modifyDate, jdbcType=TIMESTAMP },
+        remark = #{remark, jdbcType=VARCHAR }
+        WHERE id = #{id, jdbcType=BIGINT }
+    </update>
+    <!-- 禁用用户登录信息 -->
+    <update id="fordenUserInfoById">
+        UPDATE t_user SET
+        status = 2
+        WHERE id IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    <!-- 启用用户登录信息 -->
+    <update id="openUserInfoById" parameterType="Long">
+        UPDATE t_user SET
+        status = 1
+        WHERE id IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <!-- 删除用户信息 -->
+    <delete id="delUserInfo">
+        DELETE FROM t_user WHERE id IN
+        <foreach collection="array" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
+    <!-- 重置用户密码信息 -->
+    <update id="resUserInfoById" parameterType="Long">
+        UPDATE t_user SET
+        password = '96e79218965eb72c92a549dd5a330112'
+        WHERE id = #{rowid, jdbcType=BIGINT}
+    </update>
 </mapper>

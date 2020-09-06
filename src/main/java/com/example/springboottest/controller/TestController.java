@@ -15,11 +15,11 @@ public class TestController {
     @RequestMapping("/list")
     @WebLogger("学生列表")
     @ResponseBody
-    public List<User> list( String name){
+    public List<User> list(String name) {
         List<User> list = new ArrayList<>();
-        User student0=new User(1,"kobe","kobe","123","user-add");
-        User student1=new User(2,"james","james","123","user-add");
-        User student2=new User(3,"rose","rose","123","user-add");
+        User student0 = new User(1, "kobe", "kobe", "123", "user-add");
+        User student1 = new User(2, "james", "james", "123", "user-add");
+        User student2 = new User(3, "rose", "rose", "123", "user-add");
 
         list.add(student0);
         list.add(student1);

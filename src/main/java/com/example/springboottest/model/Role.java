@@ -30,7 +30,6 @@ public class Role {
      * This method returns the value of the database column t_role.id
      *
      * @return the value of t_role.id
-     *
      * @mbggenerated
      */
     public Integer getId() {
@@ -42,7 +41,6 @@ public class Role {
      * This method sets the value of the database column t_role.id
      *
      * @param id the value for t_role.id
-     *
      * @mbggenerated
      */
     public void setId(Integer id) {
@@ -54,7 +52,6 @@ public class Role {
      * This method returns the value of the database column t_role.name
      *
      * @return the value of t_role.name
-     *
      * @mbggenerated
      */
     public String getName() {
@@ -66,7 +63,6 @@ public class Role {
      * This method sets the value of the database column t_role.name
      *
      * @param name the value for t_role.name
-     *
      * @mbggenerated
      */
     public void setName(String name) {
@@ -78,7 +74,6 @@ public class Role {
      * This method returns the value of the database column t_role.dept_id
      *
      * @return the value of t_role.dept_id
-     *
      * @mbggenerated
      */
     public Integer getDeptId() {
@@ -90,7 +85,6 @@ public class Role {
      * This method sets the value of the database column t_role.dept_id
      *
      * @param deptId the value for t_role.dept_id
-     *
      * @mbggenerated
      */
     public void setDeptId(Integer deptId) {

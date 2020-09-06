@@ -15,13 +15,14 @@ public interface UserMapper {
 
     /**
      * 根据id来查用户信息
+     *
      * @param id
      * @return
      */
     User getById(int id);
 
 
-    List<Map<String, Object>> selectAll(Map<String, Object> map)throws Exception;
+    List<Map<String, Object>> selectAll(Map<String, Object> map) throws Exception;
 
-    Integer selectCount(Map<String, Object> map)throws Exception;
+    Integer selectCount(Map<String, Object> map) throws Exception;
 }

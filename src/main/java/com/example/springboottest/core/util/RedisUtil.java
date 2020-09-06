@@ -26,6 +26,7 @@ public class RedisUtil {
 
     /**
      * key 值序列化
+     *
      * @param redisTemplate
      */
     @Autowired(required = false)
@@ -94,7 +95,7 @@ public class RedisUtil {
         redisTemplate.setValueSerializer(new StringRedisSerializer());
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
         result = operations.get(key);
-        if(result==null){
+        if (result == null) {
             return null;
         }
         return result.toString();
@@ -139,7 +140,7 @@ public class RedisUtil {
         return result;
     }
 
-    public  boolean hmset(String key, Map<String, String> value) {
+    public boolean hmset(String key, Map<String, String> value) {
         boolean result = false;
         try {
             redisTemplate.opsForHash().putAll(key, value);
@@ -150,10 +151,10 @@ public class RedisUtil {
         return result;
     }
 
-    public  Map<String,String> hmget(String key) {
-        Map<String,String> result =null;
+    public Map<String, String> hmget(String key) {
+        Map<String, String> result = null;
         try {
-            result=  redisTemplate.opsForHash().entries(key);
+            result = redisTemplate.opsForHash().entries(key);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,6 +163,7 @@ public class RedisUtil {
 
     /**
      * 自增
+     *
      * @param key
      * @param growthLength
      * @return
@@ -174,10 +176,11 @@ public class RedisUtil {
 
     /**
      * 设置一个自增的数据
+     *
      * @param key
      * @param growthLength
      */
-    public void incr(String key,Long growthLength){
+    public void incr(String key, Long growthLength) {
         redisTemplate.opsForValue().increment(key, growthLength);
     }
 

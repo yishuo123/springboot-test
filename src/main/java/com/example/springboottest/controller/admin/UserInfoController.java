@@ -81,7 +81,7 @@ public class UserInfoController {
         try {
             UserInfo userInfo = SessionFactory.getSessionUser(request);
 
-            Map<String, Object> params = getMapParams(userInfo, userName, phone,status, page, rows);
+            Map<String, Object> params = getMapParams(userInfo, userName, phone, status, page, rows);
 
             pages = userInfoService.findUserInfoPages(params);
             pages.setPageIndex(page);
@@ -94,7 +94,7 @@ public class UserInfoController {
         return pages;
     }
 
-    private Map<String, Object> getMapParams(UserInfo userInfo, String userName, String phone,String status, Integer page, Integer rows) {
+    private Map<String, Object> getMapParams(UserInfo userInfo, String userName, String phone, String status, Integer page, Integer rows) {
 
         Map<String, Object> params = new HashMap<String, Object>();
 
@@ -110,7 +110,7 @@ public class UserInfoController {
         }
 
         if (StringUtils.isNotBlank(status) && !"all".equals(status)) {
-            params.put("status",  status );
+            params.put("status", status);
         }
 
         params.put("page", (page - 1) * rows);
@@ -144,7 +144,7 @@ public class UserInfoController {
                     } else {        // userInfo 不为null, id为0 说明数据
                         return false;
                     }
-                }else {
+                } else {
                     return true;
                 }
             } else {
@@ -183,7 +183,7 @@ public class UserInfoController {
                     } else {        // userInfo 不为null, id为0 说明数据
                         return false;
                     }
-                }else {
+                } else {
                     return true;
                 }
             } else {
@@ -316,7 +316,7 @@ public class UserInfoController {
 
             if (StringUtils.isNotBlank(pwd)) {
 
-                userInfoService.updatePwd(StringUtil.md5(pwd),sessionUser.getId() );
+                userInfoService.updatePwd(StringUtil.md5(pwd), sessionUser.getId());
 
                 SessionFactory.removeAllSession(request);
 
@@ -489,21 +489,22 @@ public class UserInfoController {
 
     /**
      * 校验旧密码是否正确
+     *
      * @param request
      * @return
      */
-    @RequestMapping(value="/checkPwd")
+    @RequestMapping(value = "/checkPwd")
     @ResponseBody
     public boolean checkPwd(HttpServletRequest request,
-                            @RequestParam(value = "lpwd") String pwd){
+                            @RequestParam(value = "lpwd") String pwd) {
 
-        try{
+        try {
             UserInfo sessionUser = SessionFactory.getSessionUser(request);
 
-            if(StringUtil.md5(pwd).equals(sessionUser.getPassword())){
+            if (StringUtil.md5(pwd).equals(sessionUser.getPassword())) {
                 return true;
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             log.error("checkPwd error:", e);
         }
 
@@ -516,7 +517,7 @@ public class UserInfoController {
     @RequestMapping(value = "/updateRealName", method = RequestMethod.POST)
     @ResponseBody
     public ResultValue updateRealName(HttpServletRequest request,
-                                 @RequestParam(value = "realName") String realName) {
+                                      @RequestParam(value = "realName") String realName) {
 
         ResultValue resultValue = new ResultValue();
         resultValue.setState(ResultValue._ERROR);
@@ -526,11 +527,11 @@ public class UserInfoController {
 
             if (StringUtils.isNotBlank(realName)) {
 
-                userInfoService.updateRealName(realName,sessionUser.getId() );
+                userInfoService.updateRealName(realName, sessionUser.getId());
 
                 UserInfo userInfo = userInfoService.getUserInfoById(sessionUser.getId());
 
-                SessionFactory.setSessionUser(request,userInfo);
+                SessionFactory.setSessionUser(request, userInfo);
 
                 resultValue.setState(ResultValue._SUCCESS);
 

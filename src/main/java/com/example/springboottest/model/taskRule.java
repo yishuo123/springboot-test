@@ -3,7 +3,7 @@ package com.example.springboottest.model;
 public class taskRule {
 
 
-    private  String name;
+    private String name;
     private String content;
 
     public taskRule() {

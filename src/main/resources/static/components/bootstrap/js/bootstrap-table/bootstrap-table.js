@@ -939,28 +939,28 @@
 
         if (this.options.showPaginationSwitch) {
             html.push(sprintf('<button class="btn btn-default" type="button" name="paginationSwitch" title="%s">',
-                    this.options.formatPaginationSwitch()),
+                this.options.formatPaginationSwitch()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.paginationSwitchDown),
                 '</button>');
         }
 
         if (this.options.showRefresh) {
             html.push(sprintf('<button class="btn btn-default' + (this.options.iconSize === undefined ? '' : ' btn-' + this.options.iconSize) + '" type="button" name="refresh" title="%s">',
-                    this.options.formatRefresh()),
+                this.options.formatRefresh()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.refresh),
                 '</button>');
         }
 
         if (this.options.showToggle) {
             html.push(sprintf('<button class="btn btn-default' + (this.options.iconSize === undefined ? '' : ' btn-' + this.options.iconSize) + '" type="button" name="toggle" title="%s">',
-                    this.options.formatToggle()),
+                this.options.formatToggle()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.toggle),
                 '</button>');
         }
 
         if (this.options.showColumns) {
             html.push(sprintf('<div class="keep-open btn-group" title="%s">',
-                    this.options.formatColumns()),
+                this.options.formatColumns()),
                 '<button type="button" class="btn btn-default' + (this.options.iconSize == undefined ? '' : ' btn-' + this.options.iconSize) + ' dropdown-toggle" data-toggle="dropdown">',
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.columns),
                 ' <span class="caret"></span>',
@@ -1009,8 +1009,8 @@
         if (this.options.showToggle) {
             this.$toolbar.find('button[name="toggle"]')
                 .off('click').on('click', function () {
-                    that.toggleView();
-                });
+                that.toggleView();
+            });
         }
 
         if (this.options.showColumns) {
@@ -2404,9 +2404,9 @@
         this.initServer(params && params.silent, params && params.query);
 
         //更新页码
-        if (this.options.totalPages>0) {
-            $.each($('.page-number a'),function(i,o){
-                if(i==0)
+        if (this.options.totalPages > 0) {
+            $.each($('.page-number a'), function (i, o) {
+                if (i == 0)
                     $(this).parent().addClass('active');
                 else
                     $(this).parent().removeClass('active');

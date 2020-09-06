@@ -16,7 +16,6 @@ import java.util.Arrays;
 
 /**
  * 定义一个切面
- *
  */
 @Aspect
 @Component
@@ -25,7 +24,8 @@ public class WebLoggerAspect {
 
     @Pointcut("@annotation(com.example.springboottest.anno.WebLogger)")
 //    @Pointcut("@annotation(WebLogger)")
-    public void getPoint(){}
+    public void getPoint() {
+    }
 
 
     /**
@@ -52,9 +52,9 @@ public class WebLoggerAspect {
      * 执行前
      */
     @Before("getPoint() && @annotation(WebLogger)")
-    public void before(JoinPoint joinPoint){
+    public void before(JoinPoint joinPoint) {
 
-        ServletRequestAttributes requestAttributes =(ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
 
         System.out.println("+++++++++++++++++++++++start+++++++++++++++++++++++");
@@ -87,21 +87,21 @@ public class WebLoggerAspect {
 
 
     @After("getPoint()")
-    public void after(JoinPoint joinPoint){
+    public void after(JoinPoint joinPoint) {
         System.out.println("================================end================================");
     }
 
     /**
      * 设置service 层的日志信息
+     *
      * @param joinPoint
      * @param webServiceLogger
      */
     @After("execution(* com.example.springboottest.service.*.*(..)) && @annotation(webServiceLogger)")
-    public void afterServiceLog(JoinPoint joinPoint, WebServiceLogger webServiceLogger){
+    public void afterServiceLog(JoinPoint joinPoint, WebServiceLogger webServiceLogger) {
         String logger = webServiceLogger.logger();
-        System.out.println("》》》》》》》 后置通知开始执行》》 用户执行了【 "+logger+ "】操作");
+        System.out.println("》》》》》》》 后置通知开始执行》》 用户执行了【 " + logger + "】操作");
     }
-
 
 
 }

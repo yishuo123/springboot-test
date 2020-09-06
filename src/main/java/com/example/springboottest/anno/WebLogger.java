@@ -7,15 +7,15 @@ import java.lang.annotation.*;
  * 生命周期     在运行时执行
  */
 
-@Target({ElementType.TYPE,ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface WebLogger {
 
     String value() default "";
 
-     String userName() default "";
+    String userName() default "";
 
-     String password() default "";
+    String password() default "";
 
 
 }

@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     public Page<Map<String, Object>> selectAll(Map<String, Object> map) throws Exception {
         List<Map<String, Object>> list = userMapper.selectAll(map);
         Integer total = userMapper.selectCount(map);
-        return new Page<Map<String, Object>>(total,list);
+        return new Page<Map<String, Object>>(total, list);
     }
 
 
@@ -68,11 +68,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public List<User> getListUser() {
-        String  name = "李斯特";
+        String name = "李斯特";
         this.findByName(name);
 
         // 调用 别的事务上的方法，
-          User user = ((UserService) AopContext.currentProxy()).findByName(name);
+        User user = ((UserService) AopContext.currentProxy()).findByName(name);
 
         return null;
     }
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
     //导入
     @Override
-    public Integer importExcel(MultipartFile myFile)throws Exception{
+    public Integer importExcel(MultipartFile myFile) throws Exception {
         //        1、用HSSFWorkbook打开或者创建“Excel文件对象”
         //
         //        2、用HSSFWorkbook对象返回或者创建Sheet对象
@@ -91,28 +91,28 @@ public class UserServiceImpl implements UserService {
         //
         //        4、对Cell对象读写。
         //获得文件名
-        Workbook workbook = null ;
+        Workbook workbook = null;
         String fileName = myFile.getOriginalFilename();
-        if(fileName.endsWith(XLS)){
+        if (fileName.endsWith(XLS)) {
             //2003
             workbook = new HSSFWorkbook(myFile.getInputStream());
-        }else if(fileName.endsWith(XLSX)){
+        } else if (fileName.endsWith(XLSX)) {
             //2007
             workbook = new XSSFWorkbook(myFile.getInputStream());
-        }else{
+        } else {
             throw new Exception("文件不是Excel文件");
         }
 
         Sheet sheet = workbook.getSheet("Sheet1");
         int rows = sheet.getLastRowNum();// 指的行数，一共有多少行+
-        if(rows==0){
+        if (rows == 0) {
             throw new Exception("请填写数据");
         }
         // 取xls 中 表头的字段的坐标
-        Map<String,Integer>  mapIndex = getSheetTitleIndex(sheet);
+        Map<String, Integer> mapIndex = getSheetTitleIndex(sheet);
 
         // 循环所有的行
-        for (int i = 1; i <= rows+1; i++) {
+        for (int i = 1; i <= rows + 1; i++) {
             // 读取左上端单元格
             Row row = sheet.getRow(i);
             // 行不为空
@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//小写的mm表示的是分钟
                 String dateString = getCellValue(row.getCell(3));
                 if (!StringUtils.isEmpty(dateString)) {
-                    Date date=sdf.parse(dateString);
+                    Date date = sdf.parse(dateString);
 //                    user.setTime(date);
                 }
 
@@ -147,28 +147,29 @@ public class UserServiceImpl implements UserService {
 //                userMapper.insert(user);
             }
         }
-        return rows-1;
+        return rows - 1;
     }
 
     /**
      * 取xls 表格中第一行表格的坐标
+     *
      * @param
      */
-    private Map<String,Integer> getSheetTitleIndex(Sheet sheet) {
-        Map<String,Integer> map = new HashMap<>();
+    private Map<String, Integer> getSheetTitleIndex(Sheet sheet) {
+        Map<String, Integer> map = new HashMap<>();
         // 获取表格中第一行的标题的下标
         Row rows = sheet.getRow(0);
-        for(Cell cell:rows){
+        for (Cell cell : rows) {
             cell.setCellType(cell.CELL_TYPE_STRING);//不推荐使用的方法,但是取出列有数字的话,要转换一下
-            if(!org.apache.commons.lang3.StringUtils.isBlank(cell.getStringCellValue())){
-                if(cell.getStringCellValue().equals("标题")){
-                    map.put("标题",cell.getColumnIndex());
+            if (!org.apache.commons.lang3.StringUtils.isBlank(cell.getStringCellValue())) {
+                if (cell.getStringCellValue().equals("标题")) {
+                    map.put("标题", cell.getColumnIndex());
                 }
-                if(cell.getStringCellValue().equals("作者")){
-                    map.put("作者",cell.getColumnIndex());
+                if (cell.getStringCellValue().equals("作者")) {
+                    map.put("作者", cell.getColumnIndex());
                 }
-                if(cell.getStringCellValue().equals("来源")){
-                    map.put("来源",cell.getColumnIndex());
+                if (cell.getStringCellValue().equals("来源")) {
+                    map.put("来源", cell.getColumnIndex());
                 }
 
             }
@@ -227,7 +228,7 @@ public class UserServiceImpl implements UserService {
 
     //导出
     @Override
-    public void exportExcel(HttpServletResponse response)throws Exception {
+    public void exportExcel(HttpServletResponse response) throws Exception {
         // 第一步，创建一个webbook，对应一个Excel文件
         HSSFWorkbook wb = new HSSFWorkbook();
         // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
@@ -256,7 +257,7 @@ public class UserServiceImpl implements UserService {
          */
         List<User> list = userMapper.findAll();
 
-        for (int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             row = sheet.createRow(i + 1);
             User user = list.get(i);
             // 第四步，创建单元格，并设置值
@@ -267,12 +268,12 @@ public class UserServiceImpl implements UserService {
 //            cell.setCellValue(new SimpleDateFormat("yyyy-MM-dd").format(user.getTime()));
         }
         //第六步,输出Excel文件
-        OutputStream output=response.getOutputStream();
+        OutputStream output = response.getOutputStream();
         response.reset();
         long filename = System.currentTimeMillis();
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
         String fileName = df.format(new Date());// new Date()为获取当前系统时间
-        response.setHeader("Content-disposition", "attachment; filename="+fileName+".xls");
+        response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xls");
         response.setContentType("application/msexcel");
         wb.write(output);
         output.close();

@@ -7,130 +7,130 @@ import java.io.Serializable;
 /**
  * 权限信息类
  */
-public class MenuInfo implements Serializable{
+public class MenuInfo implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Long id;			//菜单ID
-	
-	private String menuName;	//菜单名称
-	
-	private String menuIcon;	//菜单图标
-	
-	private String url;			//请求路径
-	
-	private int level;			//菜单等级 1：父级菜单； 2：二级菜单
-	
-	private String parentId;	//一级菜单ID
+    private Long id;            //菜单ID
 
-	private String parentName;   //一次菜单名称
-		
-	private int status;			//状态
-	
-	private int displayOrder;	//显示顺序
-	
-	private String remark;
-	
-	public Long getId() {
-		return id;
-	}
+    private String menuName;    //菜单名称
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String menuIcon;    //菜单图标
 
-	public String getMenuName() {
-		return menuName;
-	}
+    private String url;            //请求路径
 
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
-	}
+    private int level;            //菜单等级 1：父级菜单； 2：二级菜单
 
-	public String getUrl() {
-		return url;
-	}
+    private String parentId;    //一级菜单ID
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    private String parentName;   //一次菜单名称
 
-	public int getLevel() {
-		return level;
-	}
+    private int status;            //状态
 
-	public void setLevel(int level) {
-		this.level = level;
-	}
+    private int displayOrder;    //显示顺序
 
-	public String getParentId() {
-		return parentId;
-	}
+    private String remark;
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public int getStatus() {
-		return status;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+    public String getMenuName() {
+        return menuName;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
-	public int getDisplayOrder() {
-		return displayOrder;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setDisplayOrder(int displayOrder) {
-		this.displayOrder = displayOrder;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	public String getMenuIcon() {
-		return menuIcon;
-	}
+    public int getLevel() {
+        return level;
+    }
 
-	public void setMenuIcon(String menuIcon) {
-		this.menuIcon = menuIcon;
-	}
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-	public String getMenuIconStr(){
-		if(StringUtils.isNotBlank(this.menuIcon)) {
-			return "<i class=\"menu-icon fa " + this.menuIcon + "\"></i>";
-		}
-		return "";
-	}
+    public String getParentId() {
+        return parentId;
+    }
 
-	public String getParentName() {
-		return parentName;
-	}
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
 
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
+    public int getStatus() {
+        return status;
+    }
 
-	@Override
-	public String toString() {
-		return "MenuInfo{" +
-				"id='" + id + '\'' +
-				", menuName='" + menuName + '\'' +
-				", menuIcon='" + menuIcon + '\'' +
-				", url='" + url + '\'' +
-				", level=" + level +
-				", parentId='" + parentId + '\'' +
-				", parentName='" + parentName + '\'' +
-				", status=" + status +
-				", displayOrder=" + displayOrder +
-				", remark='" + remark + '\'' +
-				'}';
-	}
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public int getDisplayOrder() {
+        return displayOrder;
+    }
+
+    public void setDisplayOrder(int displayOrder) {
+        this.displayOrder = displayOrder;
+    }
+
+    public String getMenuIcon() {
+        return menuIcon;
+    }
+
+    public void setMenuIcon(String menuIcon) {
+        this.menuIcon = menuIcon;
+    }
+
+    public String getMenuIconStr() {
+        if (StringUtils.isNotBlank(this.menuIcon)) {
+            return "<i class=\"menu-icon fa " + this.menuIcon + "\"></i>";
+        }
+        return "";
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    @Override
+    public String toString() {
+        return "MenuInfo{" +
+                "id='" + id + '\'' +
+                ", menuName='" + menuName + '\'' +
+                ", menuIcon='" + menuIcon + '\'' +
+                ", url='" + url + '\'' +
+                ", level=" + level +
+                ", parentId='" + parentId + '\'' +
+                ", parentName='" + parentName + '\'' +
+                ", status=" + status +
+                ", displayOrder=" + displayOrder +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }

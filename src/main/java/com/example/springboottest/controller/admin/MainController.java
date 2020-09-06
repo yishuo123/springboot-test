@@ -21,39 +21,40 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(value = "/admin")
 public class MainController {
-	private Logger log = Logger.getLogger(MainController.class);
-	
-	@Resource
-	private MenuInfoService menuInfoService;
-	
-	@RequestMapping("")
-	public String index(HttpServletRequest request){
+    private Logger log = Logger.getLogger(MainController.class);
+
+    @Resource
+    private MenuInfoService menuInfoService;
+
+    @RequestMapping("")
+    public String index(HttpServletRequest request) {
 //		String menuHtml = MenuUtil.getMenu();
 //		
 //		request.getSession().setAttribute("menuHtml", menuHtml);
-		return "admin/index";
-	}
-	
-	/**
-	 * 根据用户角色获取菜单
-	 * @param request	
-	 * @return
-	 */
-	@RequestMapping(value = "/getMenu", produces = "application/html; charset=utf-8")
-	@ResponseBody
-	public String getMenu(HttpServletRequest request ){
+        return "admin/index";
+    }
 
-		String roleId = "";
-		try{
-			UserInfo userInfo = SessionFactory.getSessionUser(request);
-			return menuInfoService.getMenu(userInfo.getRoleId());
-			
-		}catch(Exception e){
-			log.error("getMenu roleId="+ roleId +", error:", e);
-		}
-		
-		return "";
-	}
-	
-	
+    /**
+     * 根据用户角色获取菜单
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/getMenu", produces = "application/html; charset=utf-8")
+    @ResponseBody
+    public String getMenu(HttpServletRequest request) {
+
+        String roleId = "";
+        try {
+            UserInfo userInfo = SessionFactory.getSessionUser(request);
+            return menuInfoService.getMenu(userInfo.getRoleId());
+
+        } catch (Exception e) {
+            log.error("getMenu roleId=" + roleId + ", error:", e);
+        }
+
+        return "";
+    }
+
+
 }

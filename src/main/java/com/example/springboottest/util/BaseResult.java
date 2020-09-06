@@ -6,17 +6,18 @@ public class BaseResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public   static final Integer MESSAGE_ERROR  = 1;
-    public  static final Integer MESSAGE_SUCCESS  = 0;
+    public static final Integer MESSAGE_ERROR = 1;
+    public static final Integer MESSAGE_SUCCESS = 0;
 
     private String message;
     private Object data;
     private Integer state;
 
 
-    public BaseResult(){
+    public BaseResult() {
         super();
     }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("BaseResult{");

@@ -22,8 +22,8 @@ public class MyInterceptor implements HandlerInterceptor {
         //获取session
         UserInfo userInfo = SessionFactory.getSessionUser(request);
 
-        if(userInfo == null){
-            response.sendRedirect(request.getContextPath()+"/admin");
+        if (userInfo == null) {
+            response.sendRedirect(request.getContextPath() + "/admin");
             return false;
         }
         return true;

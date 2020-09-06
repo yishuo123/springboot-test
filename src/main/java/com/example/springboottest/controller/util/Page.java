@@ -5,100 +5,101 @@ import java.util.List;
 
 /**
  * 返回页面数据
+ *
+ * @param <E>
  * @author lizy
  * 2016年11月28日
- * @param <E>
  */
 public class Page<E> implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	public static final Integer DEFAULT_MAX_RESULT = 10;
-	private static final Integer DEFAULT_TOTAL_RESULT = 0;
+    private static final long serialVersionUID = 1L;
 
-	private Integer pageIndex;
-	private Integer totalPage;
-	private Integer maxResult = DEFAULT_MAX_RESULT;
-	private Integer totalResult = DEFAULT_TOTAL_RESULT;
-	private List<E> list;
+    public static final Integer DEFAULT_MAX_RESULT = 10;
+    private static final Integer DEFAULT_TOTAL_RESULT = 0;
 
-	public Page() {
-		super();
-	}
+    private Integer pageIndex;
+    private Integer totalPage;
+    private Integer maxResult = DEFAULT_MAX_RESULT;
+    private Integer totalResult = DEFAULT_TOTAL_RESULT;
+    private List<E> list;
 
-	public Page(int pageIndex, int maxResult) {
-		super();
-		this.pageIndex = pageIndex;
-		this.maxResult = maxResult;
-	}
+    public Page() {
+        super();
+    }
 
-	public Page(Integer pageIndex, Integer maxResult) {
-		super();
-		this.pageIndex = pageIndex;
-		this.maxResult = maxResult;
-	}
-	
-	public Page(Integer totalResult, List<E> list) {
-		super();
-		this.totalResult = totalResult;
-		this.list = list;
-	}
+    public Page(int pageIndex, int maxResult) {
+        super();
+        this.pageIndex = pageIndex;
+        this.maxResult = maxResult;
+    }
 
-	public Page(Integer pageIndex, Integer maxResult, Integer totalResult, List<E> list) {
-		super();
-		this.pageIndex = pageIndex;
-		this.maxResult = maxResult;
-		this.totalResult = totalResult;
-		this.list = list;
-	}
+    public Page(Integer pageIndex, Integer maxResult) {
+        super();
+        this.pageIndex = pageIndex;
+        this.maxResult = maxResult;
+    }
 
-	public Integer getPageIndex() {
-		return null == pageIndex ? 0 : pageIndex;
-	}
+    public Page(Integer totalResult, List<E> list) {
+        super();
+        this.totalResult = totalResult;
+        this.list = list;
+    }
 
-	public void setPageIndex(Integer pageIndex) {
-		this.pageIndex = pageIndex;
-	}
+    public Page(Integer pageIndex, Integer maxResult, Integer totalResult, List<E> list) {
+        super();
+        this.pageIndex = pageIndex;
+        this.maxResult = maxResult;
+        this.totalResult = totalResult;
+        this.list = list;
+    }
 
-	public Integer getTotalPage() {
-		return totalResult % getMaxResult() == 0 ? totalResult / getMaxResult() : totalResult / getMaxResult() + 1;
-	}
+    public Integer getPageIndex() {
+        return null == pageIndex ? 0 : pageIndex;
+    }
 
-	public void setTotalPage(Integer totalPage) {
-		this.totalPage = totalPage;
-	}
+    public void setPageIndex(Integer pageIndex) {
+        this.pageIndex = pageIndex;
+    }
 
-	public Integer getMaxResult() {
-		return null == maxResult ? DEFAULT_MAX_RESULT : maxResult;
-	}
+    public Integer getTotalPage() {
+        return totalResult % getMaxResult() == 0 ? totalResult / getMaxResult() : totalResult / getMaxResult() + 1;
+    }
 
-	public void setMaxResult(Integer maxResult) {
-		this.maxResult = maxResult;
-	}
+    public void setTotalPage(Integer totalPage) {
+        this.totalPage = totalPage;
+    }
 
-	public List<E> getList() {
-		return list;
-	}
+    public Integer getMaxResult() {
+        return null == maxResult ? DEFAULT_MAX_RESULT : maxResult;
+    }
 
-	public void setList(List<E> list) {
-		this.list = list;
-	}
+    public void setMaxResult(Integer maxResult) {
+        this.maxResult = maxResult;
+    }
 
-	public Integer getTotalResult() {
-		return totalResult;
-	}
+    public List<E> getList() {
+        return list;
+    }
 
-	public void setTotalResult(Integer totalResult) {
-		this.totalResult = totalResult;
-	}
+    public void setList(List<E> list) {
+        this.list = list;
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("List: ").append(getList() == null ? "null" : getList().size()).append(", ");
-		sb.append("MaxResult: ").append(getMaxResult()).append(", ");
-		sb.append("PageIndex: ").append(getPageIndex()).append(", ");
-		sb.append("TotalPage: ").append(getTotalPage()).append(", ");
-		sb.append("TotalResult: ").append(getTotalResult()).append(", ");
-		return sb.toString();
-	}
+    public Integer getTotalResult() {
+        return totalResult;
+    }
+
+    public void setTotalResult(Integer totalResult) {
+        this.totalResult = totalResult;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("List: ").append(getList() == null ? "null" : getList().size()).append(", ");
+        sb.append("MaxResult: ").append(getMaxResult()).append(", ");
+        sb.append("PageIndex: ").append(getPageIndex()).append(", ");
+        sb.append("TotalPage: ").append(getTotalPage()).append(", ");
+        sb.append("TotalResult: ").append(getTotalResult()).append(", ");
+        return sb.toString();
+    }
 }

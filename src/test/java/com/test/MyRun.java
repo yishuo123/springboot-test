@@ -4,15 +4,17 @@ import java.io.*;
 
 public class MyRun implements Runnable {
 
-    private volatile  boolean active;
+    private volatile boolean active;
+
     @Override
     public void run() {
         this.active = true;
-        while (active){
-            System.out.println("active ="+active );
+        while (active) {
+            System.out.println("active =" + active);
         }
     }
-    public  void stop(){
+
+    public void stop() {
 
         this.active = false;
         System.out.println("stop");
@@ -25,7 +27,7 @@ public class MyRun implements Runnable {
 //    }
 
 
-    public static void main(String[] args)throws Exception {
+    public static void main(String[] args) throws Exception {
         File f = new File("a.txt");
         FileOutputStream fop = new FileOutputStream(f);
         // 构建FileOutputStream对象,文件不存在会自动新建

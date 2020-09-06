@@ -8,71 +8,71 @@ import java.util.Date;
 public class Invoice {
 
 
-	private Long  id;   //发票编号
+    private Long id;   //发票编号
 
-	private String code;  //发票代码
+    private String code;  //发票代码
 
-	private String number;	//发票号码
+    private String number;    //发票号码
 
-	private String financialNumber;  //财务编号
+    private String financialNumber;  //财务编号
 
-	private String receiptNumber;	//单据编号 规则：单据编号规则：公司名称首字母4个字母 + 年月日6位 +“4位流水号
+    private String receiptNumber;    //单据编号 规则：单据编号规则：公司名称首字母4个字母 + 年月日6位 +“4位流水号
 
-	private Date date;		    //开票日期
+    private Date date;            //开票日期
 
-	private String content;		//发票内容(货物或应税劳务、服务明细)
+    private String content;        //发票内容(货物或应税劳务、服务明细)
 
-	private String payee;		//收款人
+    private String payee;        //收款人
 
-	private String drawer;		//开票人
+    private String drawer;        //开票人
 
-	private String noteo;		//备注1
+    private String noteo;        //备注1
 
-	private String notet;		//备注2
+    private String notet;        //备注2
 
-	private String notes;		//备注3
+    private String notes;        //备注3
 
-	private String sname;		//销售方名称
+    private String sname;        //销售方名称
 
-	private String staxpayerNumber;	    //销售方纳税人识别号
+    private String staxpayerNumber;        //销售方纳税人识别号
 
-	private String saddressPhone;		//销售方地址、电话
+    private String saddressPhone;        //销售方地址、电话
 
-	private String sbankNumber;		    //销售方开户行及账号
+    private String sbankNumber;            //销售方开户行及账号
 
-	private String bname;				//购买方名称
+    private String bname;                //购买方名称
 
-	private String btaxpayerNumber;	    //	购买方纳税人识别号
+    private String btaxpayerNumber;        //	购买方纳税人识别号
 
-	private String baddressPhone;		//购买方地址电话
+    private String baddressPhone;        //购买方地址电话
 
-	private String bbankNumber;		    //购买方开户行及账号
+    private String bbankNumber;            //购买方开户行及账号
 
-	private float btotall;				//金额合计（小写）
+    private float btotall;                //金额合计（小写）
 
-	private String btax;				//价税合计（大写）
+    private String btax;                //价税合计（大写）
 
-	private String operator;			//操作人姓名
+    private String operator;            //操作人姓名
 
-	private Date opedate;				//操作时间
+    private Date opedate;                //操作时间
 
-	private String pageno;				// 页码
+    private String pageno;                // 页码
 
-	private String pagesize;			// 页数
+    private String pagesize;            // 页数
 
-	private String name;			    // 项目名称
+    private String name;                // 项目名称
 
-	private String amount;			    // 项目金额
+    private String amount;                // 项目金额
 
-	private String proId;			    // 项目编号
+    private String proId;                // 项目编号
 
-	private String startTime;			// 开始时间
+    private String startTime;            // 开始时间
 
-    private String endTime;			    // 结束时间
+    private String endTime;                // 结束时间
 
-	private String startTotal;			// 开始金额
+    private String startTotal;            // 开始金额
 
-	private String endTotal;			// 结束金额
+    private String endTotal;            // 结束金额
 
     private String imgName;             //发票图片名称
 
@@ -410,27 +410,29 @@ public class Invoice {
 
     // 把字段中的" ，" 替换成"/"
     public String getNameFmt() {
-        if(this.name != null){
-            return name.replace(",","/");
+        if (this.name != null) {
+            return name.replace(",", "/");
         }
         return "";
     }
-//    把字段中的" ，" 替换成"/"
+
+    //    把字段中的" ，" 替换成"/"
     public String getAmountFmt() {
 
-        if(this.amount != null){
-            return amount.replace(",","/");
+        if (this.amount != null) {
+            return amount.replace(",", "/");
         }
         return "";
     }
 
     /**
      * 格式化开票时间
+     *
      * @return
      */
     public String getDateFmt() {
 
-        if(this.date != null){
+        if (this.date != null) {
             return DateUtil.sdfDate(this.date);
         }
         return "";

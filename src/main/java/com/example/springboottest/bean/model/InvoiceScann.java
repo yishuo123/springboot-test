@@ -3,11 +3,11 @@ package com.example.springboottest.bean.model;
 public class InvoiceScann {
 
 
-	private Long  id;   //x项目id
+    private Long id;   //x项目id
 
-	private String projectNumber;  //项目编号
+    private String projectNumber;  //项目编号
 
-	private String name;	//项目名称
+    private String name;    //项目名称
 
     public Long getId() {
         return id;

@@ -8,5 +8,5 @@ import java.util.List;
 @Mapper
 public interface NewMapper {
 
-    List<taskRule> findAll()throws Exception;
+    List<taskRule> findAll() throws Exception;
 }

@@ -17,13 +17,13 @@ public interface UserService {
     User getById(int id);
 
 
-    Page<Map<String,Object>> selectAll(Map<String,Object> map)throws Exception;
+    Page<Map<String, Object>> selectAll(Map<String, Object> map) throws Exception;
 
     List<User> getListUser();
 
     //导入
-    Integer importExcel(MultipartFile myFile)throws Exception;
+    Integer importExcel(MultipartFile myFile) throws Exception;
 
     // 导出
-    void exportExcel(HttpServletResponse response)throws Exception;
+    void exportExcel(HttpServletResponse response) throws Exception;
 }

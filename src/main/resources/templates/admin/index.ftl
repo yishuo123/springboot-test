@@ -24,7 +24,7 @@
 </div><!-- /.main-content-->
 </div><!-- /.main-container -->
 <script src="${components }/bootstrap-ace/js/ace-extra.min.js"></script>
-<script src="${js }/index.js?ver=1" ></script>
+<script src="${js }/index.js?ver=1"></script>
 <#include "include/base_foot.ftl" >
 </body>
 </html>

@@ -20,8 +20,8 @@ public class shiroConfig {
      * 创建ShiroFilterFactoryBean
      */
     @Bean
-    public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("defaultWebSecurityManager") DefaultWebSecurityManager defaultWebSecurityManager){
-        ShiroFilterFactoryBean  shiroFilterFactoryBean =  new ShiroFilterFactoryBean();
+    public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("defaultWebSecurityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
+        ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
         //设置安全管理器
 
@@ -35,7 +35,7 @@ public class shiroConfig {
          *          role ： 该资源必须得到角色的权限才可以访问
          */
 
-        Map<String,String> map = new LinkedHashMap<>();
+        Map<String, String> map = new LinkedHashMap<>();
 //        map.put("/user/insert","authc");
 //        map.put("/user/update","authc");
 
@@ -69,7 +69,7 @@ public class shiroConfig {
      * 创建DefaultWebSecurityManager
      */
     @Bean(name = "defaultWebSecurityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm){
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm) {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         //关联realm
         defaultWebSecurityManager.setRealm(userRealm);
@@ -80,7 +80,7 @@ public class shiroConfig {
      * 创建realm
      */
     @Bean(name = "userRealm")
-    public UserRealm gerRealm(){
+    public UserRealm gerRealm() {
         return new UserRealm();
     }
 

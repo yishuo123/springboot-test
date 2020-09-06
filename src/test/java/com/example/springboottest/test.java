@@ -13,20 +13,20 @@ import java.io.InputStreamReader;
 @RunWith(SpringRunner.class)
 public class test {
     @Test
-    public void test(){
+    public void test() {
         int x = 30;
 
-        do{
-            System.out.print("value of x : " + x );
+        do {
+            System.out.print("value of x : " + x);
             x++;
             System.out.print("\n");
-        }while( x < 20 );
+        } while (x < 20);
     }
 
     @Test
     public void test1() {
         int a1 = 5;
-        double a2 =(float)a1;
+        double a2 = (float) a1;
         System.out.println(a2);
 
     }
