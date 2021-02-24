@@ -30,4 +30,8 @@ public class test {
         System.out.println(a2);
 
     }
+
+    void test2(){
+        System.out.println("测试数据");
+    }
 }
