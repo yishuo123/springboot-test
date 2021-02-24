@@ -33,5 +33,6 @@ public class test {
 
     void test2(){
         System.out.println("测试数据");
+        System.out.println("数据");
     }
 }
